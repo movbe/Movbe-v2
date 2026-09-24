@@ -85,6 +85,8 @@
     "userNotAuthenticatedDescription": "You must sign in to upload videos.",
     "invalidFile": "Invalid file",
     "loadingCategories": "Loading categories...",
+    "categoriesError": "Could not load categories. Check your connection or disable ad blockers.",
+    "retry": "Retry",
     "status": "Status"
   },
   "auth": {

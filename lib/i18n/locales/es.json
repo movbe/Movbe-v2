@@ -85,6 +85,8 @@
     "userNotAuthenticatedDescription": "Debes iniciar sesión para subir videos.",
     "invalidFile": "Archivo no válido",
     "loadingCategories": "Cargando categorías...",
+    "categoriesError": "No se pudieron cargar las categorías. Revisa tu conexión o desactiva bloqueadores de anuncios.",
+    "retry": "Reintentar",
     "status": "Estado"
   },
   "auth": {
