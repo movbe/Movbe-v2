@@ -1,3 +1,5 @@
+import { VideoCategoryKey } from '../../constants/categories'
+
 export interface Video {
   id: string
   title: string
@@ -53,22 +55,7 @@ export interface VideoCreator {
   verified: boolean
 }
 
-export type VideoCategory =
-  | 'Música'
-  | 'Videojuegos'
-  | 'Noticias'
-  | 'Educación'
-  | 'Entretenimiento'
-  | 'Deportes'
-  | 'Tecnología'
-  | 'Cocina'
-  | 'Viajes'
-  | 'Moda'
-  | 'Ciencia'
-  | 'Arte'
-  | 'Comedia'
-  | 'Documentales'
-  | 'Otros'
+export type VideoCategory = VideoCategoryKey
 
 export interface VideoInteraction {
   videoId: string

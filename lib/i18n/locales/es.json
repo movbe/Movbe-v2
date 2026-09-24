@@ -49,7 +49,8 @@
     "automotive": "Automovilismo",
     "pets": "Mascotas",
     "fitness": "Fitness",
-    "diy": "Hazlo tú mismo"
+    "diy": "Hazlo tú mismo",
+    "other": "Otros"
   },
   "upload": {
     "title": "Subir Video",
@@ -85,8 +86,6 @@
     "userNotAuthenticatedDescription": "Debes iniciar sesión para subir videos.",
     "invalidFile": "Archivo no válido",
     "loadingCategories": "Cargando categorías...",
-    "categoriesError": "No se pudieron cargar las categorías. Revisa tu conexión o desactiva bloqueadores de anuncios.",
-    "retry": "Reintentar",
     "status": "Estado"
   },
   "auth": {
