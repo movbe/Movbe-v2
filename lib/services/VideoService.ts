@@ -20,6 +20,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage'
 
+import { DEFAULT_VIDEO_CATEGORY } from '../constants/categories'
 import { db } from '../firebase/config'
 import { FirestoreVideo } from '../types/entities/video'
 import { VideoUploadData, VideoUploadProgress } from '../types/services/IVideoService'
@@ -255,7 +256,7 @@ export class VideoService {
                 original: downloadURL,
               },
               thumbnailURL: '',
-              category: category || 'Otros',
+              category: category || DEFAULT_VIDEO_CATEGORY,
               tags: tags || [],
               language: 'es',
               visibility: visibility || 'public',

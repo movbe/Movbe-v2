@@ -43,12 +43,7 @@ export default function UploadPage() {
   const { title, description, category, selectedFile, uploading, uploadProgress } = useAppSelector(
     state => state.upload
   )
-  const {
-    categories: categoriesData,
-    loading: categoriesLoading,
-    error: categoriesError,
-    refetch: refetchCategories,
-  } = useCategories()
+  const { categories: categoriesData, loading: categoriesLoading } = useCategories()
   const dispatch = useAppDispatch()
   const router = useRouter()
   const { toast } = useToast()
@@ -269,21 +264,6 @@ export default function UploadPage() {
                         )}
                       </SelectContent>
                     </Select>
-                    {categoriesError && (
-                      <div className='flex items-center gap-2 text-sm text-destructive'>
-                        <AlertCircle className='h-4 w-4 shrink-0' />
-                        <span>{t('upload.categoriesError')}</span>
-                        <Button
-                          type='button'
-                          variant='link'
-                          size='sm'
-                          className='h-auto p-0'
-                          onClick={refetchCategories}
-                        >
-                          {t('upload.retry')}
-                        </Button>
-                      </div>
-                    )}
                   </div>
 
                   <div className='space-y-2'>
