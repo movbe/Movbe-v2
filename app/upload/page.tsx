@@ -167,13 +167,17 @@ export default function UploadPage() {
     } catch (error: unknown) {
       trackUpload('error')
       const errorMessage = error instanceof Error ? error.message : 'unknown_error'
+      const errorCode =
+        error && typeof error === 'object' && 'code' in error ? String(error.code) : errorMessage
       trackCustomEvent('upload_error', 'Upload', errorMessage)
+      // eslint-disable-next-line no-console
+      console.error('Video upload failed:', error)
 
-      // Error will be shown in toast
+      // Include the Firebase error code so failures can be diagnosed without devtools
       toast({
         variant: 'destructive',
         title: t('upload.uploadError'),
-        description: t('upload.uploadErrorDescription'),
+        description: `${t('upload.uploadErrorDescription')} (${errorCode})`,
         action: (
           <div className='flex items-center text-red-600'>
             <AlertCircle className='h-4 w-4' />
