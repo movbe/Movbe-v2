@@ -292,7 +292,10 @@ export default function UploadPage() {
                     </div>
                     {selectedFile && (
                       <div className='text-sm text-muted-foreground'>
-                        {t('upload.fileSize')}: {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
+                        <span>
+                          {t('upload.fileSize')}: {(selectedFile.size / (1024 * 1024)).toFixed(2)}{' '}
+                          MB
+                        </span>
                       </div>
                     )}
                   </div>
@@ -305,7 +308,9 @@ export default function UploadPage() {
                       </div>
                       <Progress value={uploadProgress.progress} className='w-full' />
                       <div className='text-xs text-muted-foreground'>
-                        {t('upload.status')}: {uploadProgress.status}
+                        <span>
+                          {t('upload.status')}: {uploadProgress.status}
+                        </span>
                       </div>
                     </div>
                   )}
@@ -319,16 +324,18 @@ export default function UploadPage() {
                     {uploading ? (
                       <>
                         <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2' />
-                        {uploadProgress
-                          ? t('upload.uploadingProgress', {
-                              progress: Math.round(uploadProgress.progress),
-                            })
-                          : t('upload.preparing')}
+                        <span>
+                          {uploadProgress
+                            ? t('upload.uploadingProgress', {
+                                progress: Math.round(uploadProgress.progress),
+                              })
+                            : t('upload.preparing')}
+                        </span>
                       </>
                     ) : (
                       <>
                         <Upload className='h-4 w-4 mr-2' />
-                        {t('upload.uploadButton')}
+                        <span>{t('upload.uploadButton')}</span>
                       </>
                     )}
                   </Button>

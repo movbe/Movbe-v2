@@ -7,13 +7,16 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useAuth } from '@/contexts/AuthContext'
 import { useToast } from '@/lib/hooks/use-toast'
 import { useNavigation } from '@/lib/hooks/useNavigation'
 import { UserService } from '@/lib/services/UserService'
+import { useAppDispatch, useAppSelector } from '@/lib/store/hooks'
+import { refreshUserProfile } from '@/lib/store/slices/authSlice'
 
 export default function VerifyAgePage() {
-  const { userProfile, user, loading, refreshUserProfile } = useAuth()
+  // Read from the same store the route guard uses, or the two disagree and bounce the user home
+  const { userProfile, user, loading } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
   const { navigateTo } = useNavigation()
   const { toast } = useToast()
   const [birthDate, setBirthDate] = useState('')
@@ -102,7 +105,7 @@ export default function VerifyAgePage() {
       })
 
       // Refresh user profile to get updated data
-      await refreshUserProfile()
+      await dispatch(refreshUserProfile(user)).unwrap()
 
       toast({
         title: 'Verificación completada',

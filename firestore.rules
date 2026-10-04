@@ -1,0 +1,77 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    // True when the update only touches the listed fields
+    function onlyChanges(fields) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(fields);
+    }
+
+    // Profiles are public; only the owner can write, and nobody can change their own role
+    match /users/{uid} {
+      allow read: if true;
+      allow create: if isOwner(uid)
+        && request.resource.data.get('role', 'normal') == 'normal';
+      allow update: if isOwner(uid)
+        && request.resource.data.get('role', null) == resource.data.get('role', null);
+    }
+
+    match /userSettings/{uid} {
+      allow read, write: if isOwner(uid);
+    }
+
+    match /videos/{videoId} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.uploaderId == request.auth.uid;
+      allow delete: if isOwner(resource.data.uploaderId);
+      allow update: if isOwner(resource.data.uploaderId)
+        // Anyone (including logged-out viewers) can bump the view counter
+        || onlyChanges(['viewCount', 'lastViewedAt'])
+        // Logged-in users can update like/rating/comment counters
+        || (signedIn() && onlyChanges([
+              'likeCount', 'dislikeCount', 'commentCount',
+              'rating', 'ratingCount', 'lastRatedAt'
+            ]));
+    }
+
+    // Views can be recorded by logged-out viewers too
+    match /videoViews/{viewId} {
+      allow read: if signedIn();
+      allow create: if request.resource.data.userId == null
+        || isOwner(request.resource.data.userId);
+    }
+
+    match /videoLikes/{likeId} {
+      allow read: if true;
+      allow create: if isOwner(request.resource.data.userId);
+      allow update, delete: if isOwner(resource.data.userId);
+    }
+
+    match /videoRatings/{ratingId} {
+      allow read: if true;
+      allow create: if isOwner(request.resource.data.userId);
+      allow update, delete: if isOwner(resource.data.userId);
+    }
+
+    match /comments/{commentId} {
+      allow read: if true;
+      allow create: if isOwner(request.resource.data.userId);
+      allow update, delete: if isOwner(resource.data.userId);
+    }
+
+    match /subscriptions/{subId} {
+      allow read: if true;
+      allow create: if isOwner(request.resource.data.subscriberId);
+      allow delete: if isOwner(resource.data.subscriberId);
+    }
+  }
+}
