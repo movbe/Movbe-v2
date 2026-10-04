@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useCallback } from 'react'
 
-import { useAuth } from '@/contexts/AuthContext'
+import { useAppSelector } from '@/lib/store/hooks'
 
 // Routes that don't require age verification
 const PUBLIC_ROUTES = [
@@ -24,7 +24,7 @@ const PUBLIC_ROUTES = [
 const ALLOWED_UNVERIFIED_ROUTES = [...PUBLIC_ROUTES, '/auth/logout']
 
 export function useAgeVerification() {
-  const { user, userProfile, loading } = useAuth()
+  const { user, userProfile, loading } = useAppSelector(state => state.auth)
   const router = useRouter()
   const pathname = usePathname()
 

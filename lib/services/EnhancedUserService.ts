@@ -48,8 +48,9 @@ export class EnhancedUserService {
         await setDoc(userRef, userData)
         return userData
       }
-    } catch {
-      // Error handling - return null on failure
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to load/create user profile in Firestore:', error)
       return null
     }
   }
