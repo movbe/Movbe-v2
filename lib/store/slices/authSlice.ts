@@ -37,6 +37,7 @@ const serializeUserProfile = (profile: UserProfile): UserProfile => {
     coverImageURL: profile.coverImageURL,
     role: profile.role,
     ageVerified: profile.ageVerified,
+    isAdult: profile.isAdult,
     dateOfBirth: toISOString(profile.dateOfBirth),
     createdAt: toISOString(profile.createdAt) || '',
     lastLoginAt: toISOString(profile.lastLoginAt) || '',
