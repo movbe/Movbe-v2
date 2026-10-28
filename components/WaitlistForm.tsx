@@ -59,16 +59,16 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
   if (submittedData) {
     const typeLabels: Record<WaitlistTabType, { label: string; desc: string }> = {
       icebreaker: {
-        label: 'Pase Rompehielo Social',
-        desc: 'Recibirás prioridad por haber llegado a través de nuestras campañas en redes sociales.',
+        label: 'Lista de Espera - Rompehielo 🧊',
+        desc: 'Recibirás prioridad por haber comentado Rompehielo y llegado a través de redes sociales.',
       },
       customer: {
-        label: 'Espectador / Cliente Beta',
-        desc: 'Serás de los primeros en probar la experiencia de visualización e interacción.',
+        label: 'Alianza Estratégica: Marcas y Anunciantes',
+        desc: 'Tu solicitud de marca ha sido registrada para diseñar la estrategia de tu primera campaña.',
       },
       creator: {
-        label: 'Creador de Contenido & Partner',
-        desc: 'Tu canal tendrá acceso preferencial y soporte para creadores en el lanzamiento.',
+        label: 'Early Adopters - Creadores (Beta LATAM)',
+        desc: 'Has sido registrado para ser de los primeros 100 creadores en Movbe con monetización por vista.',
       },
     }
 
@@ -87,10 +87,10 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
               ¡Gracias por registrarte, {submittedData.name}!
             </h2>
             <p className='text-muted-foreground max-w-md mx-auto text-sm sm:text-base'>
-              Hemos registrado tu solicitud. Te notificaremos a{' '}
-              <span className='font-semibold text-foreground'>{submittedData.email}</span> cuando la
-              versión Beta y el acceso anticipado de{' '}
-              <span className='text-primary font-medium'>Rompehielo</span> estén listos.
+              {typeLabels[submittedData.type].desc}
+            </p>
+            <p className='text-xs text-muted-foreground'>
+              Te notificaremos a <span className='font-semibold text-foreground'>{submittedData.email}</span> cuando la versión Beta esté lista.
             </p>
           </div>
 
@@ -100,12 +100,11 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
               <span>Resumen de tu registro</span>
             </div>
             <p>
-              &bull; <strong className='text-foreground'>Modalidad:</strong>{' '}
+              &bull; <strong className='text-foreground'>Formulario:</strong>{' '}
               {typeLabels[submittedData.type].label}
             </p>
             <p>
-              &bull; <strong className='text-foreground'>Aviso de privacidad:</strong> Aceptado y
-              vigente
+              &bull; <strong className='text-foreground'>Aviso de privacidad:</strong> Aceptado y vigente
             </p>
             <p>
               &bull; <strong className='text-foreground'>Contacto de privacidad:</strong>{' '}
@@ -120,7 +119,7 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
               <Link href='/explore'>Explorar Movbe</Link>
             </Button>
             <Button variant='outline' onClick={handleReset}>
-              Inscribir a otra persona
+              Completar otro formulario
             </Button>
           </div>
         </CardContent>
@@ -136,14 +135,14 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
             variant='outline'
             className='bg-primary/10 text-primary border-primary/30 px-3 py-1 font-medium'
           >
-            <Sparkles className='h-3.5 w-3.5 mr-1.5' /> Acceso Anticipado &bull; Beta Rompehielo
+            <Sparkles className='h-3.5 w-3.5 mr-1.5' /> Acceso Anticipado &bull; Beta Movbe &bull; Rompehielo
           </Badge>
         </div>
         <CardTitle className='text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text'>
-          Únete a la Lista de Espera de Rompehielo
+          Cuestionarios Early Adopters & Lista de Espera
         </CardTitle>
         <CardDescription className='text-sm sm:text-base leading-relaxed'>
-          Selecciona la opción que mejor se adapte a ti para completar el formulario correspondiente.
+          Selecciona tu perfil para responder el cuestionario correspondiente y entrar a la lista de espera prioritaria.
         </CardDescription>
 
         {/* Tabs de Selección entre los 3 formularios */}
@@ -159,7 +158,7 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
                 className='flex items-center justify-center gap-1.5 py-2.5 px-2 text-xs sm:text-sm font-semibold rounded-lg data-[state=active]:bg-background data-[state=active]:text-blue-500 data-[state=active]:shadow-md transition-all'
               >
                 <Share2 className='h-4 w-4 shrink-0' />
-                <span className='truncate'>Rompehielo Social</span>
+                <span className='truncate'>Rompehielo 🧊</span>
               </TabsTrigger>
 
               <TabsTrigger
@@ -167,7 +166,7 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
                 className='flex items-center justify-center gap-1.5 py-2.5 px-2 text-xs sm:text-sm font-semibold rounded-lg data-[state=active]:bg-background data-[state=active]:text-emerald-500 data-[state=active]:shadow-md transition-all'
               >
                 <Users className='h-4 w-4 shrink-0' />
-                <span className='truncate'>Clientes / Público</span>
+                <span className='truncate'>Marcas & Pauta</span>
               </TabsTrigger>
 
               <TabsTrigger
