@@ -17,6 +17,7 @@ const PUBLIC_ROUTES = [
   '/terms',
   '/privacy',
   '/waitlist',
+  '/explore',
   '/about',
   '/',
   '/watch',

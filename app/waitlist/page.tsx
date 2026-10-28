@@ -1,6 +1,7 @@
 'use client'
 
 import { Sparkles, Users, Bell, Rocket, ShieldCheck } from 'lucide-react'
+import Link from 'next/link'
 import HeaderDynamic from '@/components/HeaderDynamic'
 import { PageTransition } from '@/components/PageTransition'
 import Sidebar from '@/components/Sidebar'
@@ -33,6 +34,14 @@ export default function WaitlistPage() {
                   anticipado, ayuda a dar forma a la plataforma y recibe novedades exclusivas antes
                   que nadie.
                 </p>
+                <div className='pt-1'>
+                  <Link
+                    href='/explore'
+                    className='inline-flex items-center text-xs sm:text-sm text-primary hover:underline font-medium'
+                  >
+                    ¿Ya quieres ver contenido? Explorar videos en Movbe &rarr;
+                  </Link>
+                </div>
               </div>
 
               {/* Grid with Form and Info Cards */}

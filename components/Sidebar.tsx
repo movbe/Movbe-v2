@@ -74,7 +74,13 @@ export default function Sidebar() {
       <Button variant='ghost' className='w-full justify-start' asChild>
         <NavigationLink href='/'>
           <Home className='mr-2 h-4 w-4' />
-          Inicio
+          Inicio (Lista de Espera)
+        </NavigationLink>
+      </Button>
+      <Button variant='ghost' className='w-full justify-start' asChild>
+        <NavigationLink href='/explore'>
+          <Tv className='mr-2 h-4 w-4' />
+          Explorar Videos
         </NavigationLink>
       </Button>
       <Button variant='ghost' className='w-full justify-start' asChild>

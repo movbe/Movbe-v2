@@ -1,33 +1,5 @@
-import { CategoryService } from '@/lib/services/CategoryService'
-import { VideoService } from '@/lib/services/VideoService'
+import { redirect } from 'next/navigation'
 
-import HomePageClient from './HomePageClient'
-
-// Enable ISR - revalidate every 5 minutes
-export const revalidate = 300
-
-export default async function HomePage() {
-  const videoService = new VideoService()
-  const categoryService = new CategoryService()
-
-  try {
-    const [videos, categories] = await Promise.all([
-      videoService.getPublicVideos(24),
-      categoryService.getCategories(),
-    ])
-
-    return <HomePageClient initialVideos={videos} categories={categories} />
-  } catch {
-    // Error handled by returning fallback data
-
-    // If categories fail, try to get videos only
-    try {
-      const videos = await videoService.getPublicVideos(24)
-      return <HomePageClient initialVideos={videos} categories={[]} />
-    } catch {
-      // Error handled by returning empty state
-      // Return with empty data in case of complete failure
-      return <HomePageClient initialVideos={[]} categories={[]} />
-    }
-  }
+export default function HomePage() {
+  redirect('/waitlist')
 }

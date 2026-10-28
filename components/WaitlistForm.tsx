@@ -159,7 +159,7 @@ export function WaitlistForm() {
 
           <div className='flex flex-col sm:flex-row gap-3 justify-center pt-2'>
             <Button asChild className='bg-primary hover:bg-primary/90'>
-              <Link href='/'>Explorar Movbe</Link>
+              <Link href='/explore'>Explorar Movbe</Link>
             </Button>
             <Button variant='outline' onClick={handleReset}>
               Inscribir a otra persona
