@@ -2,119 +2,76 @@
 
 import {
   CheckCircle2,
-  ChevronDown,
-  ChevronUp,
+  Film,
   Info,
-  Mail,
-  Send,
-  Shield,
+  Share2,
   Sparkles,
-  User,
+  Users,
 } from 'lucide-react'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
-import { useToast } from '@/lib/hooks/use-toast'
-import { waitlistService } from '@/lib/services/WaitlistService'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { CreatorForm } from './waitlist/CreatorForm'
+import { CustomerForm } from './waitlist/CustomerForm'
+import { IcebreakerForm } from './waitlist/IcebreakerForm'
 
-export function WaitlistForm() {
-  const { toast } = useToast()
+export type WaitlistTabType = 'icebreaker' | 'customer' | 'creator'
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [role, setRole] = useState('')
-  const [answers, setAnswers] = useState('')
+interface WaitlistFormProps {
+  defaultTab?: WaitlistTabType
+}
 
-  // Checkboxes
-  const [privacyAccepted, setPrivacyAccepted] = useState(false)
-  const [promotionalConsent, setPromotionalConsent] = useState(false)
+export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
+  const searchParams = useSearchParams()
+  const [activeTab, setActiveTab] = useState<WaitlistTabType>(defaultTab)
 
-  // UI state
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [showFullPrivacy, setShowFullPrivacy] = useState(true)
-  const [privacyError, setPrivacyError] = useState(false)
+  // Submitted state
+  const [submittedData, setSubmittedData] = useState<{
+    name: string
+    email: string
+    type: WaitlistTabType
+  } | null>(null)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!name.trim() || !email.trim()) {
-      toast({
-        title: 'Campos requeridos',
-        description: 'Por favor, completa tu nombre y correo electrónico.',
-        variant: 'destructive',
-      })
-      return
+  // Read URL query parameter if present (?type=customer, ?type=creator, ?type=icebreaker)
+  useEffect(() => {
+    const typeParam = searchParams?.get('type') || searchParams?.get('tab')
+    if (typeParam === 'icebreaker' || typeParam === 'customer' || typeParam === 'creator') {
+      setActiveTab(typeParam)
     }
+  }, [searchParams])
 
-    if (!privacyAccepted) {
-      setPrivacyError(true)
-      toast({
-        title: 'Aceptación obligatoria',
-        description:
-          'Debes leer y aceptar el aviso de privacidad para unirte a la lista de espera.',
-        variant: 'destructive',
-      })
-      return
-    }
-
-    setIsSubmitting(true)
-    setPrivacyError(false)
-
-    try {
-      await waitlistService.joinWaitlist({
-        name,
-        email,
-        role: role || 'normal',
-        answers,
-        privacyAccepted,
-        promotionalConsent,
-      })
-
-      setIsSubmitted(true)
-      toast({
-        title: '¡Inscripción exitosa!',
-        description:
-          'Te has registrado correctamente en la lista de espera de Rompehielo. Te contactaremos pronto.',
-      })
-    } catch {
-      // Even if Firestore throws, offline entry was saved locally in service
-      setIsSubmitted(true)
-      toast({
-        title: '¡Registro guardado!',
-        description: 'Tu solicitud para la lista de espera de Rompehielo ha sido registrada.',
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
+  const handleSuccess = (data: { name: string; email: string }) => {
+    setSubmittedData({
+      ...data,
+      type: activeTab,
+    })
   }
 
   const handleReset = () => {
-    setName('')
-    setEmail('')
-    setRole('')
-    setAnswers('')
-    setPrivacyAccepted(false)
-    setPromotionalConsent(false)
-    setIsSubmitted(false)
-    setPrivacyError(false)
+    setSubmittedData(null)
   }
 
-  if (isSubmitted) {
+  if (submittedData) {
+    const typeLabels: Record<WaitlistTabType, { label: string; desc: string }> = {
+      icebreaker: {
+        label: 'Pase Rompehielo Social',
+        desc: 'Recibirás prioridad por haber llegado a través de nuestras campañas en redes sociales.',
+      },
+      customer: {
+        label: 'Espectador / Cliente Beta',
+        desc: 'Serás de los primeros en probar la experiencia de visualización e interacción.',
+      },
+      creator: {
+        label: 'Creador de Contenido & Partner',
+        desc: 'Tu canal tendrá acceso preferencial y soporte para creadores en el lanzamiento.',
+      },
+    }
+
     return (
       <Card className='w-full max-w-2xl mx-auto border border-primary/20 bg-card/95 shadow-2xl backdrop-blur-sm animate-in fade-in zoom-in-95 duration-300'>
         <CardContent className='pt-10 pb-8 px-6 text-center space-y-6'>
@@ -124,16 +81,16 @@ export function WaitlistForm() {
 
           <div className='space-y-2'>
             <Badge variant='outline' className='bg-primary/5 text-primary border-primary/20 px-3 py-1'>
-              <Sparkles className='h-3.5 w-3.5 mr-1.5' /> Lista de Espera Rompehielo
+              <Sparkles className='h-3.5 w-3.5 mr-1.5' /> {typeLabels[submittedData.type].label}
             </Badge>
             <h2 className='text-2xl sm:text-3xl font-bold tracking-tight'>
-              ¡Gracias por registrarte, {name}!
+              ¡Gracias por registrarte, {submittedData.name}!
             </h2>
             <p className='text-muted-foreground max-w-md mx-auto text-sm sm:text-base'>
-              Hemos recibido tus datos correctamente. Te contactaremos a{' '}
-              <span className='font-semibold text-foreground'>{email}</span> cuando la versión Beta
-              y el acceso anticipado de <span className='text-primary font-medium'>Rompehielo</span>{' '}
-              estén disponibles.
+              Hemos registrado tu solicitud. Te notificaremos a{' '}
+              <span className='font-semibold text-foreground'>{submittedData.email}</span> cuando la
+              versión Beta y el acceso anticipado de{' '}
+              <span className='text-primary font-medium'>Rompehielo</span> estén listos.
             </p>
           </div>
 
@@ -143,14 +100,15 @@ export function WaitlistForm() {
               <span>Resumen de tu registro</span>
             </div>
             <p>
-              &bull; <strong className='text-foreground'>Aviso de privacidad:</strong> Aceptado
+              &bull; <strong className='text-foreground'>Modalidad:</strong>{' '}
+              {typeLabels[submittedData.type].label}
             </p>
             <p>
-              &bull; <strong className='text-foreground'>Comunicaciones promocionales:</strong>{' '}
-              {promotionalConsent ? 'Autorizadas' : 'No autorizadas'}
+              &bull; <strong className='text-foreground'>Aviso de privacidad:</strong> Aceptado y
+              vigente
             </p>
             <p>
-              &bull; <strong className='text-foreground'>Consultas de privacidad:</strong> Escríbenos a{' '}
+              &bull; <strong className='text-foreground'>Contacto de privacidad:</strong>{' '}
               <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline'>
                 movbe58@gmail.com
               </a>
@@ -178,331 +136,68 @@ export function WaitlistForm() {
             variant='outline'
             className='bg-primary/10 text-primary border-primary/30 px-3 py-1 font-medium'
           >
-            <Sparkles className='h-3.5 w-3.5 mr-1.5' /> Acceso Anticipado &bull; Beta
+            <Sparkles className='h-3.5 w-3.5 mr-1.5' /> Acceso Anticipado &bull; Beta Rompehielo
           </Badge>
         </div>
         <CardTitle className='text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text'>
           Únete a la Lista de Espera de Rompehielo
         </CardTitle>
         <CardDescription className='text-sm sm:text-base leading-relaxed'>
-          Completa el formulario para asegurar tu lugar en el lanzamiento de la versión Beta de
-          Rompehielo en Movbe y recibir novedades exclusivas sobre la disponibilidad y acceso
-          anticipado.
+          Selecciona la opción que mejor se adapte a ti para completar el formulario correspondiente.
         </CardDescription>
-      </CardHeader>
 
-      <CardContent className='p-4 sm:p-6 sm:pt-0'>
-        <form onSubmit={handleSubmit} className='space-y-6'>
-          {/* Datos Personales */}
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-            <div className='space-y-2'>
-              <Label htmlFor='waitlist-name' className='text-sm font-semibold flex items-center gap-1.5'>
-                <User className='h-4 w-4 text-primary' />
-                Nombre completo <span className='text-destructive'>*</span>
-              </Label>
-              <Input
-                id='waitlist-name'
-                type='text'
-                placeholder='Ej. Laura Gómez'
-                value={name}
-                onChange={e => setName(e.target.value)}
-                required
-                disabled={isSubmitting}
-                className='h-11'
-              />
-            </div>
-
-            <div className='space-y-2'>
-              <Label htmlFor='waitlist-email' className='text-sm font-semibold flex items-center gap-1.5'>
-                <Mail className='h-4 w-4 text-primary' />
-                Correo electrónico <span className='text-destructive'>*</span>
-              </Label>
-              <Input
-                id='waitlist-email'
-                type='email'
-                placeholder='tucorreo@ejemplo.com'
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
-                disabled={isSubmitting}
-                className='h-11'
-              />
-            </div>
-          </div>
-
-          {/* Rol / Perfil */}
-          <div className='space-y-2'>
-            <Label htmlFor='waitlist-role' className='text-sm font-semibold'>
-              ¿Cómo te describirías mejor en Movbe? (Opcional)
-            </Label>
-            <Select value={role} onValueChange={setRole} disabled={isSubmitting}>
-              <SelectTrigger id='waitlist-role' className='h-11'>
-                <SelectValue placeholder='Selecciona tu perfil de usuario' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='creator'>Creador de contenido</SelectItem>
-                <SelectItem value='viewer'>Espectador / Usuario regular</SelectItem>
-                <SelectItem value='business'>Empresa, Marca o Negocio</SelectItem>
-                <SelectItem value='developer'>Desarrollador / Entusiasta de tecnología</SelectItem>
-                <SelectItem value='other'>Otro</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Respuestas / Feedback */}
-          <div className='space-y-2'>
-            <Label htmlFor='waitlist-answers' className='text-sm font-semibold'>
-              ¿Qué esperas o qué te gustaría ver en la versión Beta de Rompehielo? (Opcional)
-            </Label>
-            <Textarea
-              id='waitlist-answers'
-              placeholder='Comparte tus expectativas, ideas de funciones o por qué te interesa unirte...'
-              value={answers}
-              onChange={e => setAnswers(e.target.value)}
-              disabled={isSubmitting}
-              rows={3}
-              className='resize-none text-sm'
-            />
-          </div>
-
-          {/* 11. Aviso de privacidad y tratamiento de datos personales */}
-          <div className='rounded-xl border bg-muted/20 p-4 sm:p-5 space-y-4'>
-            <div className='flex items-start justify-between gap-3'>
-              <div className='flex items-center gap-2'>
-                <Shield className='h-5 w-5 text-primary shrink-0' />
-                <div>
-                  <h3 className='font-semibold text-sm sm:text-base text-foreground'>
-                    11. Aviso de privacidad y tratamiento de datos personales
-                  </h3>
-                  <p className='text-xs text-muted-foreground'>
-                    Responsable: Movbe &bull; Contacto:{' '}
-                    <a
-                      href='mailto:movbe58@gmail.com'
-                      className='text-primary hover:underline font-medium'
-                    >
-                      movbe58@gmail.com
-                    </a>
-                  </p>
-                </div>
-              </div>
-              <Button
-                type='button'
-                variant='ghost'
-                size='sm'
-                onClick={() => setShowFullPrivacy(!showFullPrivacy)}
-                className='h-8 px-2 text-xs text-muted-foreground hover:text-foreground shrink-0'
-              >
-                {showFullPrivacy ? (
-                  <>
-                    <ChevronUp className='h-4 w-4 mr-1' /> Ocultar detalle
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown className='h-4 w-4 mr-1' /> Ver detalle
-                  </>
-                )}
-              </Button>
-            </div>
-
-            {/* Texto íntegro del aviso */}
-            {showFullPrivacy && (
-              <div className='text-xs leading-relaxed text-muted-foreground space-y-3.5 pt-2 border-t max-h-72 overflow-y-auto pr-2 rounded'>
-                <div>
-                  <strong className='text-foreground block mb-0.5'>¿Qué información recopilamos?</strong>
-                  <p>
-                    Recopilamos tu nombre, dirección de correo electrónico y las respuestas que
-                    proporciones al completar este formulario.
-                  </p>
-                </div>
-
-                <div>
-                  <strong className='text-foreground block mb-0.5'>¿Para qué utilizamos tus datos?</strong>
-                  <p className='mb-1'>Utilizaremos tus datos personales para:</p>
-                  <ul className='list-disc list-inside space-y-0.5 ml-2'>
-                    <li>Gestionar tu inscripción en la lista de espera de Rompehielo.</li>
-                    <li>Contactarte sobre la versión Beta, su disponibilidad y el acceso anticipado.</li>
-                    <li>
-                      Enviarte novedades, actualizaciones y comunicaciones promocionales si has dado tu
-                      consentimiento para recibirlas.
-                    </li>
-                    <li>
-                      Analizar las respuestas para comprender las necesidades de los usuarios y mejorar
-                      Rompehielo.
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <strong className='text-foreground block mb-0.5'>¿Cómo protegemos tu información?</strong>
-                  <p>
-                    Movbe adoptará medidas razonables para proteger tus datos personales frente al
-                    acceso, uso, divulgación o pérdida no autorizados. El acceso a esta información
-                    estará limitado a las personas y proveedores que necesiten utilizarla para las
-                    finalidades descritas.
-                  </p>
-                </div>
-
-                <div>
-                  <strong className='text-foreground block mb-0.5'>¿Compartiremos tus datos personales?</strong>
-                  <p>
-                    Movbe no venderá tus datos personales. Podremos utilizar proveedores tecnológicos
-                    para gestionar el formulario, almacenar información o enviar correos electrónicos,
-                    de acuerdo con las condiciones y garantías de privacidad aplicables.
-                  </p>
-                </div>
-
-                <div>
-                  <strong className='text-foreground block mb-0.5'>
-                    ¿Durante cuánto tiempo conservaremos tus datos?
-                  </strong>
-                  <p>
-                    Conservaremos tus datos durante el tiempo necesario para gestionar la lista de
-                    espera y cumplir las finalidades descritas, salvo que la legislación aplicable
-                    exija o permita un período diferente.
-                  </p>
-                </div>
-
-                <div>
-                  <strong className='text-foreground block mb-0.5'>¿Cuáles son tus derechos?</strong>
-                  <p>
-                    Puedes solicitar información sobre el tratamiento de tus datos personales, pedir su
-                    actualización o eliminación cuando corresponda, retirar tu consentimiento y
-                    ejercer los demás derechos que te reconozca la legislación aplicable.
-                  </p>
-                  <p className='mt-1'>
-                    Para realizar una solicitud relacionada con tus datos personales, escribe a{' '}
-                    <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline'>
-                      movbe58@gmail.com
-                    </a>.
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Checkboxes de consentimiento */}
-            <div className='space-y-4 pt-2 border-t'>
-              {/* Checkbox Obligatorio */}
-              <div
-                className={`p-3 rounded-lg border transition-colors ${
-                  privacyError
-                    ? 'border-destructive bg-destructive/5'
-                    : 'border-border/60 bg-background/50 hover:bg-background'
-                }`}
-              >
-                <div className='flex items-start space-x-3'>
-                  <Checkbox
-                    id='privacy-accept'
-                    checked={privacyAccepted}
-                    onCheckedChange={checked => {
-                      setPrivacyAccepted(Boolean(checked))
-                      if (checked) setPrivacyError(false)
-                    }}
-                    disabled={isSubmitting}
-                    className='mt-1'
-                  />
-                  <div className='space-y-1'>
-                    <Label
-                      htmlFor='privacy-accept'
-                      className='text-xs sm:text-sm font-medium leading-relaxed cursor-pointer text-foreground'
-                    >
-                      <span className='font-bold text-destructive mr-1'>*</span>
-                      <strong className='underline-offset-2'>Aceptación del aviso de privacidad</strong>{' '}
-                      <span className='text-xs font-normal text-muted-foreground'>
-                        (Casilla de verificación obligatoria)
-                      </span>
-                    </Label>
-                    <p className='text-xs text-muted-foreground leading-relaxed'>
-                      He leído el aviso de privacidad y entiendo cómo Movbe utilizará mis datos
-                      personales para gestionar mi inscripción en la lista de espera de Rompehielo y
-                      atender mi solicitud.
-                    </p>
-                  </div>
-                </div>
-                {privacyError && (
-                  <p className='text-xs font-medium text-destructive mt-2 ml-7'>
-                    Debes marcar esta casilla para poder enviar el formulario.
-                  </p>
-                )}
-              </div>
-
-              {/* Checkbox Opcional */}
-              <div className='p-3 rounded-lg border border-border/60 bg-background/50 hover:bg-background transition-colors'>
-                <div className='flex items-start space-x-3'>
-                  <Checkbox
-                    id='promotional-consent'
-                    checked={promotionalConsent}
-                    onCheckedChange={checked => setPromotionalConsent(Boolean(checked))}
-                    disabled={isSubmitting}
-                    className='mt-1'
-                  />
-                  <div className='space-y-1'>
-                    <Label
-                      htmlFor='promotional-consent'
-                      className='text-xs sm:text-sm font-medium leading-relaxed cursor-pointer text-foreground'
-                    >
-                      <strong>Consentimiento para recibir correos promocionales</strong>{' '}
-                      <span className='text-xs font-normal text-muted-foreground'>
-                        (Casilla de verificación opcional, sin marcar por defecto)
-                      </span>
-                    </Label>
-                    <p className='text-xs text-muted-foreground leading-relaxed'>
-                      Autorizo expresamente a Movbe a utilizar mi correo electrónico para enviarme
-                      novedades, actualizaciones, invitaciones a probar nuevas funciones y
-                      comunicaciones comerciales o promocionales relacionadas con Rompehielo.
-                      Entiendo que puedo retirar mi consentimiento en cualquier momento escribiendo a{' '}
-                      <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline'>
-                        movbe58@gmail.com
-                      </a>{' '}
-                      o utilizando el enlace para cancelar la suscripción incluido en los correos
-                      electrónicos, cuando corresponda.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contacto adicional para consultas sobre privacidad */}
-              <div className='text-xs text-muted-foreground pt-1 flex items-center justify-between flex-wrap gap-2'>
-                <span>
-                  Contacto para consultas sobre privacidad:{' '}
-                  <a
-                    href='mailto:movbe58@gmail.com'
-                    className='text-primary font-medium hover:underline'
-                  >
-                    movbe58@gmail.com
-                  </a>
-                </span>
-                <Link
-                  href='/privacy'
-                  target='_blank'
-                  className='text-primary font-medium hover:underline'
-                >
-                  Ver aviso en pestaña nueva &rarr;
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Botón de envío */}
-          <Button
-            type='submit'
-            disabled={isSubmitting}
-            className='w-full h-12 text-sm sm:text-base font-semibold bg-gradient-to-r from-primary via-primary/90 to-primary hover:opacity-95 shadow-lg shadow-primary/20'
+        {/* Tabs de Selección entre los 3 formularios */}
+        <div className='pt-2'>
+          <Tabs
+            value={activeTab}
+            onValueChange={val => setActiveTab(val as WaitlistTabType)}
+            className='w-full'
           >
-            {isSubmitting ? (
-              <>
-                <div className='animate-spin rounded-full h-4 w-4 border-2 border-primary-foreground border-t-transparent mr-2' />
-                Procesando inscripción...
-              </>
-            ) : (
-              <>
-                <Send className='h-4 w-4 mr-2' />
-                Unirme a la lista de espera
-              </>
-            )}
-          </Button>
-        </form>
-      </CardContent>
+            <TabsList className='grid grid-cols-3 w-full h-auto p-1.5 bg-muted/70 rounded-xl gap-1'>
+              <TabsTrigger
+                value='icebreaker'
+                className='flex items-center justify-center gap-1.5 py-2.5 px-2 text-xs sm:text-sm font-semibold rounded-lg data-[state=active]:bg-background data-[state=active]:text-blue-500 data-[state=active]:shadow-md transition-all'
+              >
+                <Share2 className='h-4 w-4 shrink-0' />
+                <span className='truncate'>Rompehielo Social</span>
+              </TabsTrigger>
+
+              <TabsTrigger
+                value='customer'
+                className='flex items-center justify-center gap-1.5 py-2.5 px-2 text-xs sm:text-sm font-semibold rounded-lg data-[state=active]:bg-background data-[state=active]:text-emerald-500 data-[state=active]:shadow-md transition-all'
+              >
+                <Users className='h-4 w-4 shrink-0' />
+                <span className='truncate'>Clientes / Público</span>
+              </TabsTrigger>
+
+              <TabsTrigger
+                value='creator'
+                className='flex items-center justify-center gap-1.5 py-2.5 px-2 text-xs sm:text-sm font-semibold rounded-lg data-[state=active]:bg-background data-[state=active]:text-purple-500 data-[state=active]:shadow-md transition-all'
+              >
+                <Film className='h-4 w-4 shrink-0' />
+                <span className='truncate'>Creadores</span>
+              </TabsTrigger>
+            </TabsList>
+
+            {/* Contenido Formulario 1: Icebreaker / Social */}
+            <TabsContent value='icebreaker' className='mt-6 animate-in fade-in-50 duration-200'>
+              <IcebreakerForm onSuccess={handleSuccess} />
+            </TabsContent>
+
+            {/* Contenido Formulario 2: Clientes / Espectadores */}
+            <TabsContent value='customer' className='mt-6 animate-in fade-in-50 duration-200'>
+              <CustomerForm onSuccess={handleSuccess} />
+            </TabsContent>
+
+            {/* Contenido Formulario 3: Creadores de Contenido */}
+            <TabsContent value='creator' className='mt-6 animate-in fade-in-50 duration-200'>
+              <CreatorForm onSuccess={handleSuccess} />
+            </TabsContent>
+          </Tabs>
+        </div>
+      </CardHeader>
     </Card>
   )
 }
+
 export default WaitlistForm

@@ -6,6 +6,8 @@ import HeaderDynamic from '@/components/HeaderDynamic'
 import { PageTransition } from '@/components/PageTransition'
 import Sidebar from '@/components/Sidebar'
 import WaitlistForm from '@/components/WaitlistForm'
+import { Suspense } from 'react'
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAppDispatch } from '@/lib/store/hooks'
 import { toggleSidebar } from '@/lib/store/slices/sidebarSlice'
@@ -48,7 +50,16 @@ export default function WaitlistPage() {
               <div className='grid grid-cols-1 lg:grid-cols-12 gap-8 items-start'>
                 {/* Formulario Principal (col-span-8) */}
                 <div className='lg:col-span-8 order-1'>
-                  <WaitlistForm />
+                  <Suspense
+                    fallback={
+                      <div className='p-12 text-center text-muted-foreground'>
+                        <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4' />
+                        Cargando formulario...
+                      </div>
+                    }
+                  >
+                    <WaitlistForm />
+                  </Suspense>
                 </div>
 
                 {/* Columna Lateral con Ventajas y Confianza (col-span-4) */}
