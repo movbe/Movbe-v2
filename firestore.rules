@@ -73,5 +73,11 @@ service cloud.firestore {
       allow create: if isOwner(request.resource.data.subscriberId);
       allow delete: if isOwner(resource.data.subscriberId);
     }
+
+    // Waitlist registrations for Rompehielo Beta
+    match /waitlist/{id} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
   }
 }

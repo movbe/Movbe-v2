@@ -159,6 +159,132 @@ export default function TermsPage() {
               </p>
             </section>
 
+            <section>
+              <h2 className='text-xl font-semibold mb-3'>
+                11. Aviso de privacidad y tratamiento de datos personales
+              </h2>
+              <div className='text-muted-foreground leading-relaxed space-y-4'>
+                <p>
+                  <span className='font-semibold text-foreground'>Responsable del tratamiento:</span>{' '}
+                  Movbe
+                  <br />
+                  <span className='font-semibold text-foreground'>Correo electrónico de contacto:</span>{' '}
+                  <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline'>
+                    movbe58@gmail.com
+                  </a>
+                </p>
+
+                <div>
+                  <h3 className='font-semibold text-foreground mb-1'>¿Qué información recopilamos?</h3>
+                  <p>
+                    Recopilamos tu nombre, dirección de correo electrónico y las respuestas que
+                    proporciones al completar este formulario.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className='font-semibold text-foreground mb-1'>¿Para qué utilizamos tus datos?</h3>
+                  <p className='mb-2'>Utilizaremos tus datos personales para:</p>
+                  <ul className='list-disc list-inside space-y-1 ml-4'>
+                    <li>Gestionar tu inscripción en la lista de espera de Rompehielo.</li>
+                    <li>Contactarte sobre la versión Beta, su disponibilidad y el acceso anticipado.</li>
+                    <li>
+                      Enviarte novedades, actualizaciones y comunicaciones promocionales si has dado tu
+                      consentimiento para recibirlas.
+                    </li>
+                    <li>
+                      Analizar las respuestas para comprender las necesidades de los usuarios y mejorar
+                      Rompehielo.
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className='font-semibold text-foreground mb-1'>¿Cómo protegemos tu información?</h3>
+                  <p>
+                    Movbe adoptará medidas razonables para proteger tus datos personales frente al
+                    acceso, uso, divulgación o pérdida no autorizados. El acceso a esta información
+                    estará limitado a las personas y proveedores que necesiten utilizarla para las
+                    finalidades descritas.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className='font-semibold text-foreground mb-1'>¿Compartiremos tus datos personales?</h3>
+                  <p>
+                    Movbe no venderá tus datos personales. Podremos utilizar proveedores tecnológicos
+                    para gestionar el formulario, almacenar información o enviar correos electrónicos,
+                    de acuerdo con las condiciones y garantías de privacidad aplicables.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className='font-semibold text-foreground mb-1'>
+                    ¿Durante cuánto tiempo conservaremos tus datos?
+                  </h3>
+                  <p>
+                    Conservaremos tus datos durante el tiempo necesario para gestionar la lista de
+                    espera y cumplir las finalidades descritas, salvo que la legislación aplicable
+                    exija o permita un período diferente.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className='font-semibold text-foreground mb-1'>¿Cuáles son tus derechos?</h3>
+                  <p>
+                    Puedes solicitar información sobre el tratamiento de tus datos personales, pedir su
+                    actualización o eliminación cuando corresponda, retirar tu consentimiento y
+                    ejercer los demás derechos que te reconozca la legislación aplicable.
+                  </p>
+                  <p className='mt-1'>
+                    Para realizar una solicitud relacionada con tus datos personales, escribe a{' '}
+                    <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline'>
+                      movbe58@gmail.com
+                    </a>.
+                  </p>
+                </div>
+
+                <div className='bg-muted/40 p-4 rounded-lg space-y-3 border'>
+                  <h4 className='font-semibold text-foreground text-sm'>
+                    Aceptaciones y Consentimientos en formularios
+                  </h4>
+                  <div className='space-y-2 text-xs sm:text-sm'>
+                    <div>
+                      <span className='font-medium text-foreground'>Aceptación del aviso de privacidad:</span>{' '}
+                      <span className='text-muted-foreground'>(Casilla obligatoria)</span>
+                      <p className='italic mt-0.5 text-muted-foreground'>
+                        &ldquo;He leído el aviso de privacidad y entiendo cómo Movbe utilizará mis datos
+                        personales para gestionar mi inscripción en la lista de espera de Rompehielo y
+                        atender mi solicitud.&rdquo;
+                      </p>
+                    </div>
+                    <div>
+                      <span className='font-medium text-foreground'>
+                        Consentimiento para recibir correos promocionales:
+                      </span>{' '}
+                      <span className='text-muted-foreground'>(Casilla opcional, sin marcar por defecto)</span>
+                      <p className='italic mt-0.5 text-muted-foreground'>
+                        &ldquo;Autorizo expresamente a Movbe a utilizar mi correo electrónico para
+                        enviarme novedades, actualizaciones, invitaciones a probar nuevas funciones y
+                        comunicaciones comerciales o promocionales relacionadas con Rompehielo. Entiendo
+                        que puedo retirar mi consentimiento en cualquier momento escribiendo a
+                        movbe58@gmail.com o utilizando el enlace para cancelar la suscripción incluido en
+                        los correos electrónicos, cuando corresponda.&rdquo;
+                      </p>
+                    </div>
+                    <div className='pt-1'>
+                      <span className='font-medium text-foreground'>
+                        Contacto para consultas sobre privacidad:
+                      </span>{' '}
+                      <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline'>
+                        movbe58@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <div className='pt-6 border-t'>
               <p className='text-center text-xs text-muted-foreground'>
                 © 2024 Movbe. Todos los derechos reservados.

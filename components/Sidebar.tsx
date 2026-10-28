@@ -13,6 +13,7 @@ import {
   X,
   Upload,
   Mail,
+  Sparkles,
 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -151,6 +152,12 @@ export default function Sidebar() {
         Videos que me gustan
       </Button>
       <hr className='my-4' />
+      <Button variant='ghost' className='w-full justify-start' asChild>
+        <NavigationLink href='/waitlist'>
+          <Sparkles className='mr-2 h-4 w-4 text-primary' />
+          Lista de espera Rompehielo
+        </NavigationLink>
+      </Button>
       <Button variant='ghost' className='w-full justify-start' asChild>
         <NavigationLink href='/contact'>
           <Mail className='mr-2 h-4 w-4' />
