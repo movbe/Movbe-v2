@@ -1,6 +1,6 @@
 'use client'
 
-import { Sparkles, Users, Bell, Rocket, ShieldCheck } from 'lucide-react'
+import { Sparkles, Users, Rocket, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import HeaderDynamic from '@/components/HeaderDynamic'
 import { PageTransition } from '@/components/PageTransition'
