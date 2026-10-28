@@ -13,6 +13,8 @@ const PUBLIC_ROUTES = [
   '/auth/verify-age',
   '/terms',
   '/privacy',
+  '/waitlist',
+  '/explore',
   '/about',
   '/',
   '/watch',
