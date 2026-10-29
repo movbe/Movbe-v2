@@ -34,7 +34,7 @@ export function PrivacySection({
           <Shield className='h-5 w-5 text-primary shrink-0' />
           <div>
             <h3 className='font-semibold text-sm sm:text-base text-foreground'>
-              11. Aviso de privacidad y tratamiento de datos personales
+              Política de Privacidad (Privacy Policy)
             </h3>
             <p className='text-xs text-muted-foreground'>
               Responsable: Movbe &bull; Contacto:{' '}

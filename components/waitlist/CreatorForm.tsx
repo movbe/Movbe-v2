@@ -47,7 +47,7 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
   // Q8
   const [betaContactConsent, setBetaContactConsent] = useState('')
 
-  // Privacy Section 11
+  // Privacy Policy
   const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const [promotionalConsent, setPromotionalConsent] = useState(false)
   const [privacyError, setPrivacyError] = useState(false)
@@ -360,7 +360,7 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
         </RadioGroup>
       </div>
 
-      {/* 11. Aviso de Privacidad y Tratamiento de Datos Personales */}
+      {/* Política de Privacidad (Privacy Policy) */}
       <PrivacySection
         privacyAccepted={privacyAccepted}
         onPrivacyChange={val => {

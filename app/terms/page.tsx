@@ -161,7 +161,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className='text-xl font-semibold mb-3'>
-                11. Aviso de privacidad y tratamiento de datos personales
+                Política de Privacidad y Tratamiento de Datos Personales (Privacy Policy)
               </h2>
               <div className='text-muted-foreground leading-relaxed space-y-4'>
                 <p>

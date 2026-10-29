@@ -49,7 +49,7 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
   // Q9
   const [betaContactConsent, setBetaContactConsent] = useState('')
 
-  // Privacy Section 11
+  // Privacy Policy
   const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const [promotionalConsent, setPromotionalConsent] = useState(false)
   const [privacyError, setPrivacyError] = useState(false)
@@ -386,7 +386,7 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
         </RadioGroup>
       </div>
 
-      {/* 11. Aviso de Privacidad y Tratamiento de Datos Personales */}
+      {/* Política de Privacidad (Privacy Policy) */}
       <PrivacySection
         privacyAccepted={privacyAccepted}
         onPrivacyChange={val => {
