@@ -1,33 +1,36 @@
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase/config'
 
-export interface WaitlistEntry {
-  id?: string
+export type WaitlistType = 'icebreaker' | 'customer' | 'creator'
+
+export interface WaitlistSubmissionData {
+  waitlistType: WaitlistType
   name: string
   email: string
-  role?: string
-  answers?: string
   privacyAccepted: boolean
   promotionalConsent: boolean
+  responses: Record<string, unknown>
+  source?: string
   createdAt?: unknown
 }
 
 export class WaitlistService {
-  async joinWaitlist(data: Omit<WaitlistEntry, 'id' | 'createdAt'>): Promise<string> {
+  async submitWaitlist(data: Omit<WaitlistSubmissionData, 'createdAt'>): Promise<string> {
     try {
-      const docRef = await addDoc(collection(db, 'waitlist'), {
+      const payload = {
+        waitlistType: data.waitlistType,
         name: data.name.trim(),
         email: data.email.trim().toLowerCase(),
-        role: data.role || 'user',
-        answers: data.answers?.trim() || '',
         privacyAccepted: Boolean(data.privacyAccepted),
         promotionalConsent: Boolean(data.promotionalConsent),
-        source: 'rompehielo_waitlist_form',
+        responses: data.responses,
+        source: data.source || `waitlist_${data.waitlistType}`,
         createdAt: serverTimestamp(),
-      })
+      }
+
+      const docRef = await addDoc(collection(db, 'waitlist'), payload)
       return docRef.id
     } catch (error) {
-      // In case Firestore is temporarily unavailable or misconfigured, backup locally
       if (typeof window !== 'undefined') {
         try {
           const localEntries = JSON.parse(localStorage.getItem('pending_waitlist_entries') || '[]')
@@ -37,11 +40,23 @@ export class WaitlistService {
           })
           localStorage.setItem('pending_waitlist_entries', JSON.stringify(localEntries))
         } catch {
-          // Ignore localStorage errors
+          // ignore storage error
         }
       }
       throw error
     }
+  }
+
+  // Backwards compatibility alias
+  async joinWaitlist(data: Record<string, unknown>): Promise<string> {
+    return this.submitWaitlist({
+      waitlistType: (data.waitlistType as WaitlistType) || 'icebreaker',
+      name: (data.name as string) || (data.companyName as string) || '',
+      email: (data.email as string) || '',
+      privacyAccepted: Boolean(data.privacyAccepted),
+      promotionalConsent: Boolean(data.promotionalConsent),
+      responses: data,
+    })
   }
 }
 
