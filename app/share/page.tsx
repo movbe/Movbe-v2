@@ -222,6 +222,9 @@ function SharePageInner() {
                     thumbnailUrl={oembed.thumbnailUrl}
                     start={segment.start}
                     end={segment.end}
+                    maxDuration={
+                      oembed.duration && oembed.duration > 15 ? Math.floor(oembed.duration) : 180
+                    }
                     onChange={setSegment}
                   />
                 )}

@@ -1,10 +1,26 @@
+import { VideoService } from '@/lib/services/VideoService'
+
 export interface VideoOEmbedMetadata {
-  provider: 'youtube' | 'vimeo' | 'loom' | 'other'
+  provider: 'movbe' | 'youtube' | 'vimeo' | 'loom' | 'other'
   title: string
   authorName: string
   thumbnailUrl: string | null
   embedUrl: string | null
   videoId: string | null
+  duration?: number
+}
+
+function extractMovbeVideoId(rawUrl: string): string | null {
+  try {
+    const parsed = new URL(rawUrl)
+    const match = parsed.pathname.match(/^\/watch\/([^/]+)$/)
+    if (match && match[1]) {
+      return decodeURIComponent(match[1])
+    }
+  } catch {
+    return null
+  }
+  return null
 }
 
 function extractYouTubeId(rawUrl: string): string | null {
@@ -42,6 +58,34 @@ function detectProvider(rawUrl: string): VideoOEmbedMetadata['provider'] {
  * Fetches official oEmbed metadata & thumbnail URL without downloading/scraping third-party video bytes.
  */
 export async function fetchVideoOEmbed(rawUrl: string): Promise<VideoOEmbedMetadata> {
+  const movbeId = extractMovbeVideoId(rawUrl)
+  if (movbeId) {
+    try {
+      const video = await new VideoService().getVideoById(movbeId)
+      if (video) {
+        return {
+          provider: 'movbe',
+          title: video.title || 'Video en Movbe',
+          authorName: video.uploaderName || '',
+          thumbnailUrl: video.thumbnailURL || null,
+          embedUrl: null,
+          videoId: movbeId,
+          duration: video.duration,
+        }
+      }
+    } catch {
+      // Fall through to generic fallback if Firestore is unavailable
+    }
+    return {
+      provider: 'movbe',
+      title: 'Video en Movbe',
+      authorName: '',
+      thumbnailUrl: null,
+      embedUrl: null,
+      videoId: movbeId,
+    }
+  }
+
   const provider = detectProvider(rawUrl)
   const ytId = provider === 'youtube' ? extractYouTubeId(rawUrl) : null
 

@@ -1,6 +1,16 @@
 'use client'
 
-import { Bookmark, Flag, Heart, MessageCircle, Share2, ThumbsDown, ThumbsUp } from 'lucide-react'
+import {
+  Bookmark,
+  Flag,
+  Heart,
+  MessageCircle,
+  Mic,
+  Share2,
+  ThumbsDown,
+  ThumbsUp,
+} from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import StarRating from '@/components/StarRating'
@@ -34,6 +44,7 @@ export function VideoInteractions({
 }: VideoInteractionsProps) {
   const dispatch = useAppDispatch()
   const { user } = useAuth()
+  const router = useRouter()
   const { trackInteraction, trackCustomEvent, trackShare } = useAnalytics()
   const videoInteraction = useAppSelector(state => state.video.interactions[videoId])
 
@@ -391,6 +402,20 @@ export function VideoInteractions({
               >
                 <Share2 className='h-4 w-4' />
                 <span className='hidden xs:inline text-xs sm:text-sm'>Compartir</span>
+              </Button>
+
+              <Button
+                variant='default'
+                size='sm'
+                onClick={() => {
+                  const watchUrl = `${window.location.origin}/watch/${videoId}`
+                  router.push(`/share?url=${encodeURIComponent(watchUrl)}`)
+                }}
+                className='flex items-center gap-1 sm:gap-2 touch-manipulation h-9 sm:h-10'
+                aria-label='Compartir con Voz'
+              >
+                <Mic className='h-4 w-4' />
+                <span className='hidden xs:inline text-xs sm:text-sm'>Con Voz</span>
               </Button>
 
               <Button
