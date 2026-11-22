@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: false,
-    dangerouslyAllowSVG: false,
+    unoptimized: true,
+    dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         protocol: 'https',
