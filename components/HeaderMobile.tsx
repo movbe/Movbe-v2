@@ -1,7 +1,7 @@
 'use client'
 
 import { signOut } from 'firebase/auth'
-import { Menu, Search, Upload, User, BarChart3, Settings, X } from 'lucide-react'
+import { Menu, Mic, Search, Upload, User, BarChart3, Settings, X } from 'lucide-react'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -138,6 +138,16 @@ export default function HeaderMobile({
 
         {/* Mobile Right Section */}
         <div className='flex items-center space-x-2'>
+          <NavigationLink href='/share' aria-label='Compartir con Voz'>
+            <Button
+              variant='default'
+              size='icon'
+              className='h-9 w-9 rounded-full touch-manipulation'
+              title='Compartir con Voz'
+            >
+              <Mic className='h-4 w-4' />
+            </Button>
+          </NavigationLink>
           {/* Search button */}
           <Button
             variant='ghost'

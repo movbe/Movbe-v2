@@ -345,18 +345,25 @@ function SharePageInner() {
                 </CardDescription>
               </CardHeader>
               <CardContent className='space-y-4'>
-                <div className='flex gap-2'>
-                  <Input readOnly value={result.shareUrl} className='font-mono text-xs' />
-                  <Button type='button' onClick={copyLink} variant='secondary' className='gap-1.5'>
-                    {copied ? <Check className='h-4 w-4' /> : <Copy className='h-4 w-4' />}
-                    {copied ? 'Copiado' : 'Copiar'}
-                  </Button>
-                  <Button asChild variant='outline'>
-                    <Link href={`/v/${result.shortId}`}>
-                      <ExternalLink className='h-4 w-4 mr-1.5' />
-                      Abrir P5
-                    </Link>
-                  </Button>
+                <div className='flex flex-col sm:flex-row gap-2'>
+                  <Input readOnly value={result.shareUrl} className='font-mono text-xs flex-1' />
+                  <div className='flex gap-2'>
+                    <Button
+                      type='button'
+                      onClick={copyLink}
+                      variant='secondary'
+                      className='gap-1.5 flex-1 sm:flex-initial'
+                    >
+                      {copied ? <Check className='h-4 w-4' /> : <Copy className='h-4 w-4' />}
+                      {copied ? 'Copiado' : 'Copiar'}
+                    </Button>
+                    <Button asChild variant='outline' className='flex-1 sm:flex-initial'>
+                      <Link href={`/v/${result.shortId}`}>
+                        <ExternalLink className='h-4 w-4 mr-1.5' />
+                        Abrir P5
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
 
                 <div className='grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs'>
