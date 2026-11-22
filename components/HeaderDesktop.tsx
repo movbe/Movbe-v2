@@ -121,6 +121,12 @@ export default function HeaderDesktop({
 
         {/* Desktop Right Section */}
         <div className='flex items-center space-x-4'>
+          <NavigationLink href='/share'>
+            <Button size='sm' className='gap-1.5 rounded-full'>
+              <Mic className='h-4 w-4' />
+              Compartir con Voz
+            </Button>
+          </NavigationLink>
           {!mounted || loading ? (
             // Loading state
             <div className='flex items-center space-x-4'>

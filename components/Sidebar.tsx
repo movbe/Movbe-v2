@@ -74,13 +74,25 @@ export default function Sidebar() {
       <Button variant='ghost' className='w-full justify-start' asChild>
         <NavigationLink href='/'>
           <Home className='mr-2 h-4 w-4' />
-          Inicio (Lista de Espera)
+          Inicio
+        </NavigationLink>
+      </Button>
+      <Button variant='ghost' className='w-full justify-start' asChild>
+        <NavigationLink href='/waitlist'>
+          <Clock className='mr-2 h-4 w-4' />
+          Lista de Espera
         </NavigationLink>
       </Button>
       <Button variant='ghost' className='w-full justify-start' asChild>
         <NavigationLink href='/explore'>
           <Tv className='mr-2 h-4 w-4' />
           Explorar Videos
+        </NavigationLink>
+      </Button>
+      <Button variant='ghost' className='w-full justify-start' asChild>
+        <NavigationLink href='/share'>
+          <Sparkles className='mr-2 h-4 w-4 text-cyan-500' />
+          Compartir con Voz
         </NavigationLink>
       </Button>
       <Button variant='ghost' className='w-full justify-start' asChild>

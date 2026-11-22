@@ -23,6 +23,7 @@ const PUBLIC_ROUTES = [
   '/watch',
   '/search',
   '/profile',
+  '/share',
 ]
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -42,7 +43,11 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
   // Check if current path is public (including dynamic routes)
   const isPublicRoute = (path: string) => {
     return (
-      PUBLIC_ROUTES.includes(path) || path.startsWith('/watch/') || path.startsWith('/profile/')
+      PUBLIC_ROUTES.includes(path) ||
+      path.startsWith('/watch/') ||
+      path.startsWith('/profile/') ||
+      path.startsWith('/v/') ||
+      path.startsWith('/p/')
     )
   }
 
@@ -80,7 +85,9 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
       <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30'>
         <div className='text-center'>
           <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto'></div>
-          <p className='mt-2 text-muted-foreground'>Cargando...</p>
+          <p className='mt-2 text-muted-foreground' suppressHydrationWarning>
+            Cargando...
+          </p>
         </div>
       </div>
     )
@@ -112,7 +119,9 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
       <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/30'>
         <div className='text-center'>
           <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto'></div>
-          <p className='mt-2 text-muted-foreground'>Verificando acceso...</p>
+          <p className='mt-2 text-muted-foreground' suppressHydrationWarning>
+            Verificando acceso...
+          </p>
         </div>
       </div>
     )

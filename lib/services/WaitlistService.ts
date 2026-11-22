@@ -1,6 +1,3 @@
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../firebase/config'
-
 export type WaitlistType = 'icebreaker' | 'customer' | 'creator'
 
 export interface WaitlistSubmissionData {
@@ -17,20 +14,29 @@ export interface WaitlistSubmissionData {
 export class WaitlistService {
   async submitWaitlist(data: Omit<WaitlistSubmissionData, 'createdAt'>): Promise<string> {
     try {
-      const payload = {
-        waitlistType: data.waitlistType,
-        name: data.name.trim(),
-        email: data.email.trim().toLowerCase(),
-        privacyAccepted: Boolean(data.privacyAccepted),
-        promotionalConsent: Boolean(data.promotionalConsent),
-        responses: data.responses,
-        source: data.source || `waitlist_${data.waitlistType}`,
-        createdAt: serverTimestamp(),
+      const res = await fetch('/api/v1/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          waitlistType: data.waitlistType,
+          name: data.name.trim(),
+          email: data.email.trim().toLowerCase(),
+          role: data.waitlistType,
+          answers: JSON.stringify(data.responses ?? {}),
+          privacyAccepted: Boolean(data.privacyAccepted),
+          promotionalConsent: Boolean(data.promotionalConsent),
+          source: data.source || `waitlist_${data.waitlistType}`,
+        }),
+      })
+
+      if (!res.ok) {
+        throw new Error(`Waitlist API failed with status ${res.status}`)
       }
 
-      const docRef = await addDoc(collection(db, 'waitlist'), payload)
-      return docRef.id
+      const json = (await res.json()) as { id: string }
+      return json.id
     } catch (error) {
+      // In case Supabase is temporarily unavailable or unconfigured, backup locally
       if (typeof window !== 'undefined') {
         try {
           const localEntries = JSON.parse(localStorage.getItem('pending_waitlist_entries') || '[]')

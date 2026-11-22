@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation'
+import HomePageClient from './HomePageClient'
 
 export default function HomePage() {
-  redirect('/waitlist')
+  return <HomePageClient initialVideos={[]} categories={[]} />
 }

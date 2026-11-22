@@ -9,6 +9,7 @@ import HeaderDynamic from '@/components/HeaderDynamic'
 import { NavigationLink } from '@/components/NavigationLink'
 import { PageTransition } from '@/components/PageTransition'
 import Sidebar from '@/components/Sidebar'
+import { ShareAnalyticsPanel } from '@/components/share/ShareAnalyticsPanel'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -410,6 +411,10 @@ export default function AnalyticsPage() {
                   </TabsContent>
                 </Tabs>
               )}
+
+              <div className='mt-6'>
+                <ShareAnalyticsPanel />
+              </div>
             </div>
           </div>
         </div>
