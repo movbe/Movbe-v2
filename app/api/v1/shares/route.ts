@@ -130,10 +130,18 @@ export async function POST(request: NextRequest) {
     ])
 
     const [webpUrl, mp4Url, gifUrl, jpgWaveformUrl] = await Promise.all([
-      uploadPreviewAsset(`previews/${shortId}.webp`, composed.webp, 'image/webp'),
-      uploadPreviewAsset(`previews/${shortId}.mp4`, composed.mp4, 'video/mp4'),
-      uploadPreviewAsset(`previews/${shortId}.gif`, composed.gif, 'image/gif'),
-      uploadPreviewAsset(`previews/${shortId}_wave.jpg`, composed.jpgWaveform, 'image/jpeg'),
+      composed.webp
+        ? uploadPreviewAsset(`previews/${shortId}.webp`, composed.webp, 'image/webp')
+        : Promise.resolve(undefined),
+      composed.mp4
+        ? uploadPreviewAsset(`previews/${shortId}.mp4`, composed.mp4, 'video/mp4')
+        : Promise.resolve(undefined),
+      composed.gif
+        ? uploadPreviewAsset(`previews/${shortId}.gif`, composed.gif, 'image/gif')
+        : Promise.resolve(undefined),
+      composed.jpgWaveform
+        ? uploadPreviewAsset(`previews/${shortId}_wave.jpg`, composed.jpgWaveform, 'image/jpeg')
+        : Promise.resolve(oembed.thumbnailUrl ?? undefined),
     ])
 
     const record = await createShareRecord({

@@ -23,10 +23,18 @@ export async function processGeneratePreviewJob(job: GeneratePreviewJob) {
   })
 
   const [webp, mp4, gif, jpgWaveform] = await Promise.all([
-    uploadPreviewAsset(`previews/${job.shortId}.webp`, composed.webp, 'image/webp'),
-    uploadPreviewAsset(`previews/${job.shortId}.mp4`, composed.mp4, 'video/mp4'),
-    uploadPreviewAsset(`previews/${job.shortId}.gif`, composed.gif, 'image/gif'),
-    uploadPreviewAsset(`previews/${job.shortId}_wave.jpg`, composed.jpgWaveform, 'image/jpeg'),
+    composed.webp
+      ? uploadPreviewAsset(`previews/${job.shortId}.webp`, composed.webp, 'image/webp')
+      : Promise.resolve(undefined),
+    composed.mp4
+      ? uploadPreviewAsset(`previews/${job.shortId}.mp4`, composed.mp4, 'video/mp4')
+      : Promise.resolve(undefined),
+    composed.gif
+      ? uploadPreviewAsset(`previews/${job.shortId}.gif`, composed.gif, 'image/gif')
+      : Promise.resolve(undefined),
+    composed.jpgWaveform
+      ? uploadPreviewAsset(`previews/${job.shortId}_wave.jpg`, composed.jpgWaveform, 'image/jpeg')
+      : Promise.resolve(undefined),
   ])
 
   return {

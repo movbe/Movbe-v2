@@ -9,16 +9,17 @@ const execFileAsync = promisify(execFile)
 const MAX_WHATSAPP_BYTES = 300 * 1024 // 300 KB hard compatibility target
 
 export interface ComposedAssetsBuffers {
-  webp: Buffer
-  mp4: Buffer
-  gif: Buffer
-  jpgWaveform: Buffer
+  webp: Buffer | null
+  mp4: Buffer | null
+  gif: Buffer | null
+  jpgWaveform: Buffer | null
   sizes: {
     webp: number
     mp4: number
     gif: number
     jpgWaveform: number
   }
+  usedFfmpeg: boolean
 }
 
 async function runFfmpeg(args: string[]): Promise<void> {
@@ -262,6 +263,35 @@ export async function composeCanonicalPreviews(params: {
         gif: gif.length,
         jpgWaveform: jpgWaveform.length,
       },
+      usedFfmpeg: true,
+    }
+  } catch {
+    // Graceful fallback on serverless hosts without ffmpeg (e.g. Vercel):
+    // Fetch the official thumbnail so /p/[shortId] still has a valid og:image.
+    let thumbBuf: Buffer | null = null
+    if (params.thumbnailUrl) {
+      try {
+        const res = await fetch(params.thumbnailUrl, { signal: AbortSignal.timeout(5000) })
+        if (res.ok) {
+          thumbBuf = Buffer.from(await res.arrayBuffer())
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    return {
+      webp: null,
+      mp4: null,
+      gif: null,
+      jpgWaveform: thumbBuf,
+      sizes: {
+        webp: 0,
+        mp4: 0,
+        gif: 0,
+        jpgWaveform: thumbBuf?.length ?? 0,
+      },
+      usedFfmpeg: false,
     }
   } finally {
     await fs.rm(workDir, { recursive: true, force: true }).catch(() => {})

@@ -58,12 +58,17 @@ export async function uploadPreviewAsset(
   }
 
   // Local dev fallback: write under public/previews so Next.js serves it at /previews/...
-  const baseDir = path.resolve(process.cwd(), 'public', 'previews')
-  const localPath = path.resolve(baseDir, normalizedKey)
-  if (!localPath.startsWith(`${baseDir}${path.sep}`)) {
-    throw new Error('Invalid storage path')
+  // On read-only serverless hosts (e.g. Vercel without R2), fall back to a data URI for small assets.
+  try {
+    const baseDir = path.resolve(process.cwd(), 'public', 'previews')
+    const localPath = path.resolve(baseDir, normalizedKey)
+    if (!localPath.startsWith(`${baseDir}${path.sep}`)) {
+      throw new Error('Invalid storage path')
+    }
+    await fs.mkdir(path.dirname(localPath), { recursive: true })
+    await fs.writeFile(localPath, body)
+    return `/previews/${normalizedKey}`
+  } catch {
+    return `data:${contentType};base64,${body.toString('base64')}`
   }
-  await fs.mkdir(path.dirname(localPath), { recursive: true })
-  await fs.writeFile(localPath, body)
-  return `/previews/${normalizedKey}`
 }
