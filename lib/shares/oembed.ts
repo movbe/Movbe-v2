@@ -17,7 +17,7 @@ function extractYouTubeId(rawUrl: string): string | null {
       const v = parsed.searchParams.get('v')
       if (v) return v
       const parts = parsed.pathname.split('/').filter(Boolean)
-      const idx = parts.findIndex((p) => p === 'shorts' || p === 'embed' || p === 'live')
+      const idx = parts.findIndex(p => p === 'shorts' || p === 'embed' || p === 'live')
       if (idx !== -1 && parts[idx + 1]) return parts[idx + 1]
     }
   } catch {
@@ -66,8 +66,7 @@ export async function fetchVideoOEmbed(rawUrl: string): Promise<VideoOEmbedMetad
           title: data.title || 'Video compartido con Movbe',
           authorName: data.author_name || '',
           thumbnailUrl:
-            data.thumbnail_url ||
-            (ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : null),
+            data.thumbnail_url || (ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : null),
           embedUrl: ytId ? `https://www.youtube.com/embed/${ytId}` : null,
           videoId: ytId,
         }

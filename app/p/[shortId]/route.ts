@@ -22,10 +22,7 @@ function toAbsoluteUrl(assetUrl: string | undefined, origin: string): string {
  * Component C4 — Cross-Platform Open Graph Delivery (/p/[shortId]).
  * Serves User-Agent-aware OG meta tags without 301/302 redirect chains.
  */
-export async function GET(
-  request: NextRequest,
-  context: { params: { shortId: string } }
-) {
+export async function GET(request: NextRequest, context: { params: { shortId: string } }) {
   const { shortId } = context.params
   if (!isValidShortId(shortId)) {
     return new NextResponse('Invalid share ID', { status: 400 })

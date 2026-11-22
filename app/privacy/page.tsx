@@ -65,7 +65,10 @@ export default function PrivacyPage() {
                 <span className='font-semibold text-foreground'>
                   Correo electrónico de contacto:
                 </span>{' '}
-                <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline font-medium'>
+                <a
+                  href='mailto:movbe58@gmail.com'
+                  className='text-primary hover:underline font-medium'
+                >
                   movbe58@gmail.com
                 </a>
               </p>
@@ -85,14 +88,16 @@ export default function PrivacyPage() {
                 <p>Utilizaremos tus datos personales para:</p>
                 <ul className='list-disc list-inside space-y-1.5 ml-4'>
                   <li>Gestionar tu inscripción en la lista de espera de Rompehielo.</li>
-                  <li>Contactarte sobre la versión Beta, su disponibilidad y el acceso anticipado.</li>
                   <li>
-                    Enviarte novedades, actualizaciones y comunicaciones promocionales si has dado tu
-                    consentimiento para recibirlas.
+                    Contactarte sobre la versión Beta, su disponibilidad y el acceso anticipado.
                   </li>
                   <li>
-                    Analizar las respuestas para comprender las necesidades de los usuarios y mejorar
-                    Rompehielo.
+                    Enviarte novedades, actualizaciones y comunicaciones promocionales si has dado
+                    tu consentimiento para recibirlas.
+                  </li>
+                  <li>
+                    Analizar las respuestas para comprender las necesidades de los usuarios y
+                    mejorar Rompehielo.
                   </li>
                 </ul>
               </div>
@@ -112,8 +117,8 @@ export default function PrivacyPage() {
               <h2 className='text-xl font-semibold mb-3'>¿Compartiremos tus datos personales?</h2>
               <p className='text-muted-foreground leading-relaxed'>
                 Movbe no venderá tus datos personales. Podremos utilizar proveedores tecnológicos
-                para gestionar el formulario, almacenar información o enviar correos electrónicos, de
-                acuerdo con las condiciones y garantías de privacidad aplicables.
+                para gestionar el formulario, almacenar información o enviar correos electrónicos,
+                de acuerdo con las condiciones y garantías de privacidad aplicables.
               </p>
             </section>
 
@@ -122,9 +127,9 @@ export default function PrivacyPage() {
                 ¿Durante cuánto tiempo conservaremos tus datos?
               </h2>
               <p className='text-muted-foreground leading-relaxed'>
-                Conservaremos tus datos durante el tiempo necesario para gestionar la lista de espera
-                y cumplir las finalidades descritas, salvo que la legislación aplicable exija o
-                permita un período diferente.
+                Conservaremos tus datos durante el tiempo necesario para gestionar la lista de
+                espera y cumplir las finalidades descritas, salvo que la legislación aplicable exija
+                o permita un período diferente.
               </p>
             </section>
 
@@ -137,7 +142,10 @@ export default function PrivacyPage() {
               </p>
               <p className='text-muted-foreground leading-relaxed'>
                 Para realizar una solicitud relacionada con tus datos personales, escribe a:{' '}
-                <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline font-medium'>
+                <a
+                  href='mailto:movbe58@gmail.com'
+                  className='text-primary hover:underline font-medium'
+                >
                   movbe58@gmail.com
                 </a>
                 .
@@ -145,7 +153,9 @@ export default function PrivacyPage() {
             </section>
 
             <section className='pt-4 border-t'>
-              <h2 className='text-lg font-semibold mb-3'>Términos de Consentimiento en Formularios</h2>
+              <h2 className='text-lg font-semibold mb-3'>
+                Términos de Consentimiento en Formularios
+              </h2>
               <div className='space-y-4 text-muted-foreground'>
                 <div className='p-3 bg-muted/40 rounded-lg border'>
                   <p className='font-medium text-foreground text-sm'>
@@ -166,8 +176,8 @@ export default function PrivacyPage() {
                     enviarme novedades, actualizaciones, invitaciones a probar nuevas funciones y
                     comunicaciones comerciales o promocionales relacionadas con Rompehielo. Entiendo
                     que puedo retirar mi consentimiento en cualquier momento escribiendo a
-                    movbe58@gmail.com o utilizando el enlace para cancelar la suscripción incluido en
-                    los correos electrónicos, cuando corresponda.&rdquo;
+                    movbe58@gmail.com o utilizando el enlace para cancelar la suscripción incluido
+                    en los correos electrónicos, cuando corresponda.&rdquo;
                   </p>
                 </div>
               </div>

@@ -67,8 +67,8 @@ function SharePageInner() {
 
   useEffect(() => {
     fetch('/api/v1/voice-library')
-      .then((r) => r.json())
-      .then((d) => setTemplates(d.templates || []))
+      .then(r => r.json())
+      .then(d => setTemplates(d.templates || []))
       .catch(() => {})
   }, [])
 
@@ -107,7 +107,7 @@ function SharePageInner() {
     const res = await fetch('/api/v1/voice-library', { method: 'POST', body: fd })
     if (res.ok) {
       const { template } = (await res.json()) as { template: AudioTemplateRecord }
-      setTemplates((prev) => [template, ...prev])
+      setTemplates(prev => [template, ...prev])
       toast({ title: 'Guardado en Voice Library', description: template.title })
     }
   }
@@ -184,9 +184,7 @@ function SharePageInner() {
             <Badge variant='secondary' className='mb-2'>
               Movbe Protocol · MVP (C1–C5 + P5 + P11 + P12)
             </Badge>
-            <h1 className='text-2xl md:text-3xl font-bold'>
-              Comparte un video con tu voz
-            </h1>
+            <h1 className='text-2xl md:text-3xl font-bold'>Comparte un video con tu voz</h1>
             <p className='text-sm text-muted-foreground mt-1'>
               Pega el link, elige el fragmento y graba tu nota de voz. Generamos previews
               multi-formato (&lt;300 KB) listos para WhatsApp, Telegram e iMessage.
@@ -203,7 +201,7 @@ function SharePageInner() {
                 <div className='flex gap-2'>
                   <Input
                     value={videoUrl}
-                    onChange={(e) => setVideoUrl(e.target.value)}
+                    onChange={e => setVideoUrl(e.target.value)}
                     placeholder='https://www.youtube.com/watch?v=...'
                     required
                   />
@@ -250,11 +248,10 @@ function SharePageInner() {
                 {templates.length > 0 && (
                   <div className='space-y-2'>
                     <Label className='flex items-center gap-1.5 text-xs text-muted-foreground'>
-                      <Library className='h-3.5 w-3.5' />
-                      O elige de tu Voice Library (P12)
+                      <Library className='h-3.5 w-3.5' />O elige de tu Voice Library (P12)
                     </Label>
                     <div className='flex flex-wrap gap-2'>
-                      {templates.map((tpl) => {
+                      {templates.map(tpl => {
                         const active = selectedTemplateUrl === tpl.audioUrl && !audioBlob
                         return (
                           <Button
@@ -287,7 +284,7 @@ function SharePageInner() {
                   <Label>Título del preview</Label>
                   <Input
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={e => setTitle(e.target.value)}
                     placeholder='Ej: Casa en El Poblado — mira el minuto 1:20'
                   />
                 </div>
@@ -295,7 +292,7 @@ function SharePageInner() {
                   <Label>Nota corta</Label>
                   <Textarea
                     value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={e => setDescription(e.target.value)}
                     placeholder='Por qué deberían ver este fragmento...'
                     rows={2}
                   />
@@ -305,7 +302,7 @@ function SharePageInner() {
                     <Label>Texto botón CTA (P8)</Label>
                     <Input
                       value={ctaLabel}
-                      onChange={(e) => setCtaLabel(e.target.value)}
+                      onChange={e => setCtaLabel(e.target.value)}
                       placeholder='Ej: Agendar llamada'
                     />
                   </div>
@@ -313,7 +310,7 @@ function SharePageInner() {
                     <Label>URL del CTA</Label>
                     <Input
                       value={ctaUrl}
-                      onChange={(e) => setCtaUrl(e.target.value)}
+                      onChange={e => setCtaUrl(e.target.value)}
                       placeholder='https://calendly.com/...'
                     />
                   </div>

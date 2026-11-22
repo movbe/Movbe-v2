@@ -89,7 +89,8 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
           socialLink,
           niche: niche === 'otro' ? `Otro: ${nicheOther}` : niche,
           audienceSize,
-          censorshipHistory: censorshipHistory === 'otro' ? `Otro: ${censorshipOther}` : censorshipHistory,
+          censorshipHistory:
+            censorshipHistory === 'otro' ? `Otro: ${censorshipOther}` : censorshipHistory,
           payPerViewWillingness,
           pitchConsent,
           biggestProblem,
@@ -126,9 +127,9 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
         </h3>
         <p className='text-xs sm:text-sm text-muted-foreground leading-relaxed'>
           Movbe es la nueva plataforma de video para adultos verificados (no explícita) donde las
-          reglas las pones tú. Gana por vista, sin censura familiar y con anunciantes premium. Estamos
-          buscando a los primeros 100 creadores en LATAM para nuestra Beta. Al registrarte, entras a
-          la lista de espera prioritaria.
+          reglas las pones tú. Gana por vista, sin censura familiar y con anunciantes premium.
+          Estamos buscando a los primeros 100 creadores en LATAM para nuestra Beta. Al registrarte,
+          entras a la lista de espera prioritaria.
         </p>
       </div>
 
@@ -139,7 +140,10 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
         </Label>
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
           <div className='space-y-2'>
-            <Label htmlFor='creator-q1-name' className='text-xs text-muted-foreground flex items-center gap-1'>
+            <Label
+              htmlFor='creator-q1-name'
+              className='text-xs text-muted-foreground flex items-center gap-1'
+            >
               <User className='h-3.5 w-3.5 text-primary' /> Nombre:
             </Label>
             <Input
@@ -155,7 +159,10 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
           </div>
 
           <div className='space-y-2'>
-            <Label htmlFor='creator-q1-email' className='text-xs text-muted-foreground flex items-center gap-1'>
+            <Label
+              htmlFor='creator-q1-email'
+              className='text-xs text-muted-foreground flex items-center gap-1'
+            >
               <Mail className='h-3.5 w-3.5 text-primary' /> Email:
             </Label>
             <Input
@@ -172,8 +179,12 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
         </div>
 
         <div className='space-y-2 pt-1'>
-          <Label htmlFor='creator-q1-social' className='text-xs text-muted-foreground flex items-center gap-1'>
-            <LinkIcon className='h-3.5 w-3.5 text-purple-500' /> Link a tu Instagram, TikTok o YouTube:
+          <Label
+            htmlFor='creator-q1-social'
+            className='text-xs text-muted-foreground flex items-center gap-1'
+          >
+            <LinkIcon className='h-3.5 w-3.5 text-purple-500' /> Link a tu Instagram, TikTok o
+            YouTube:
           </Label>
           <Input
             id='creator-q1-social'
@@ -199,16 +210,25 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
             'Sensual / Creador de OnlyFans (no explícito)',
             'Gaming / Streamer sin filtros',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`niche-${opt}`} />
-              <Label htmlFor={`niche-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`niche-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
           ))}
           <div className='flex items-center space-x-2.5 p-2.5 rounded-lg border border-transparent'>
             <RadioGroupItem value='otro' id='niche-otro' />
-            <Label htmlFor='niche-otro' className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'>
+            <Label
+              htmlFor='niche-otro'
+              className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'
+            >
               Otro:
             </Label>
             <Input
@@ -236,9 +256,15 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
             'De 50.001 a 200.000 seguidores',
             'Más de 200.000 seguidores',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`audience-${opt}`} />
-              <Label htmlFor={`audience-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`audience-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -251,23 +277,36 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
         <Label className='text-sm sm:text-base font-semibold block'>
           4. ¿Has sufrido de demonetización, shadowban o censura en las plataformas actuales?
         </Label>
-        <RadioGroup value={censorshipHistory} onValueChange={setCensorshipHistory} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={censorshipHistory}
+          onValueChange={setCensorshipHistory}
+          className='space-y-2 pt-1'
+        >
           {[
             'Sí, YouTube me quitó la monetización por "lenguaje adulto"',
             'Sí, en OnlyFans me exigen ser explícito para ganar bien',
             'Sí, mis videos de fitness/modelaje fueron marcados como "sexuales"',
             'No, pero busco una alternativa con reglas más justas',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`censor-${opt}`} />
-              <Label htmlFor={`censor-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`censor-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
           ))}
           <div className='flex items-center space-x-2.5 p-2.5 rounded-lg border border-transparent'>
             <RadioGroupItem value='otro' id='censor-otro' />
-            <Label htmlFor='censor-otro' className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'>
+            <Label
+              htmlFor='censor-otro'
+              className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'
+            >
               Otro:
             </Label>
             <Input
@@ -286,17 +325,28 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
       {/* Pregunta 5 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          5. Si Movbe te ofrece un modelo de pago por vista (sin necesidad de ser explícito y con anunciantes premium), ¿estarías dispuesto a mudar o crear contenido exclusivo aquí?
+          5. Si Movbe te ofrece un modelo de pago por vista (sin necesidad de ser explícito y con
+          anunciantes premium), ¿estarías dispuesto a mudar o crear contenido exclusivo aquí?
         </Label>
-        <RadioGroup value={payPerViewWillingness} onValueChange={setPayPerViewWillingness} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={payPerViewWillingness}
+          onValueChange={setPayPerViewWillingness}
+          className='space-y-2 pt-1'
+        >
           {[
             'Sí, definitivamente',
             'Tal vez, depende de cuánto se pueda ganar por vista',
             'No, prefiero mi plataforma actual',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`ppv-${opt}`} />
-              <Label htmlFor={`ppv-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`ppv-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -307,16 +357,24 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
       {/* Pregunta 6 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          6. Para nuestro Pitch a inversionistas: ¿Aceptas que usemos tu perfil y tu respuesta (sin datos privados) como &ldquo;Evidencia de Demanda&rdquo; para demostrar que los creadores necesitan esta plataforma?
+          6. Para nuestro Pitch a inversionistas: ¿Aceptas que usemos tu perfil y tu respuesta (sin
+          datos privados) como &ldquo;Evidencia de Demanda&rdquo; para demostrar que los creadores
+          necesitan esta plataforma?
         </Label>
         <RadioGroup value={pitchConsent} onValueChange={setPitchConsent} className='space-y-2 pt-1'>
           {[
             'Sí, acepto que usen mi perfil público y mi testimonio.',
             'No, prefiero mantener mi participación en privado.',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`pitch-${opt}`} />
-              <Label htmlFor={`pitch-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`pitch-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -326,8 +384,12 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
 
       {/* Pregunta 7 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
-        <Label htmlFor='creator-biggest-problem' className='text-sm sm:text-base font-semibold block'>
-          7. ¿Cuál es el mayor problema que tienes hoy con las plataformas donde publicas? (Tu respuesta nos ayuda a construir la solución exacta que necesitas)
+        <Label
+          htmlFor='creator-biggest-problem'
+          className='text-sm sm:text-base font-semibold block'
+        >
+          7. ¿Cuál es el mayor problema que tienes hoy con las plataformas donde publicas? (Tu
+          respuesta nos ayuda a construir la solución exacta que necesitas)
         </Label>
         <Textarea
           id='creator-biggest-problem'
@@ -343,16 +405,27 @@ export function CreatorForm({ onSuccess }: CreatorFormProps) {
       {/* Pregunta 8 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          8. ¿Quieres entrar a la lista de espera y aceptas que nos pongamos en contacto contigo cuando la Beta esté lista?
+          8. ¿Quieres entrar a la lista de espera y aceptas que nos pongamos en contacto contigo
+          cuando la Beta esté lista?
         </Label>
-        <RadioGroup value={betaContactConsent} onValueChange={setBetaContactConsent} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={betaContactConsent}
+          onValueChange={setBetaContactConsent}
+          className='space-y-2 pt-1'
+        >
           {[
             'Sí, quiero ser de los primeros Early Adopters y acepto ser contactado.',
             'No por ahora.',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`contact-${opt}`} />
-              <Label htmlFor={`contact-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`contact-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>

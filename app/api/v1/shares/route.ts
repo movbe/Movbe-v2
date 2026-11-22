@@ -57,10 +57,7 @@ export async function POST(request: NextRequest) {
 
     if (audioFile instanceof File && audioFile.size > 0) {
       if (audioFile.size > MAX_AUDIO_UPLOAD_BYTES) {
-        return NextResponse.json(
-          { error: 'Audio file exceeds 5 MB limit' },
-          { status: 413 }
-        )
+        return NextResponse.json({ error: 'Audio file exceeds 5 MB limit' }, { status: 413 })
       }
       audioBuffer = Buffer.from(await audioFile.arrayBuffer())
       if (audioFile.type.includes('mp4') || audioFile.type.includes('m4a')) {
@@ -82,10 +79,7 @@ export async function POST(request: NextRequest) {
       if (res.ok) {
         const buf = Buffer.from(await res.arrayBuffer())
         if (buf.length > MAX_AUDIO_UPLOAD_BYTES) {
-          return NextResponse.json(
-            { error: 'Audio file exceeds 5 MB limit' },
-            { status: 413 }
-          )
+          return NextResponse.json({ error: 'Audio file exceeds 5 MB limit' }, { status: 413 })
         }
         audioBuffer = buf
       }

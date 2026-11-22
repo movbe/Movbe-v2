@@ -78,7 +78,9 @@ export function PrivacySection({
           </div>
 
           <div>
-            <strong className='text-foreground block mb-0.5'>¿Para qué utilizamos tus datos?</strong>
+            <strong className='text-foreground block mb-0.5'>
+              ¿Para qué utilizamos tus datos?
+            </strong>
             <p className='mb-1'>Utilizaremos tus datos personales para:</p>
             <ul className='list-disc list-inside space-y-0.5 ml-2'>
               <li>Gestionar tu inscripción en la lista de espera de Rompehielo.</li>
@@ -95,21 +97,25 @@ export function PrivacySection({
           </div>
 
           <div>
-            <strong className='text-foreground block mb-0.5'>¿Cómo protegemos tu información?</strong>
+            <strong className='text-foreground block mb-0.5'>
+              ¿Cómo protegemos tu información?
+            </strong>
             <p>
-              Movbe adoptará medidas razonables para proteger tus datos personales frente al
-              acceso, uso, divulgación o pérdida no autorizados. El acceso a esta información
-              estará limitado a las personas y proveedores que necesiten utilizarla para las
-              finalidades descritas.
+              Movbe adoptará medidas razonables para proteger tus datos personales frente al acceso,
+              uso, divulgación o pérdida no autorizados. El acceso a esta información estará
+              limitado a las personas y proveedores que necesiten utilizarla para las finalidades
+              descritas.
             </p>
           </div>
 
           <div>
-            <strong className='text-foreground block mb-0.5'>¿Compartiremos tus datos personales?</strong>
+            <strong className='text-foreground block mb-0.5'>
+              ¿Compartiremos tus datos personales?
+            </strong>
             <p>
-              Movbe no venderá tus datos personales. Podremos utilizar proveedores tecnológicos
-              para gestionar el formulario, almacenar información o enviar correos electrónicos,
-              de acuerdo con las condiciones y garantías de privacidad aplicables.
+              Movbe no venderá tus datos personales. Podremos utilizar proveedores tecnológicos para
+              gestionar el formulario, almacenar información o enviar correos electrónicos, de
+              acuerdo con las condiciones y garantías de privacidad aplicables.
             </p>
           </div>
 
@@ -118,9 +124,9 @@ export function PrivacySection({
               ¿Durante cuánto tiempo conservaremos tus datos?
             </strong>
             <p>
-              Conservaremos tus datos durante el tiempo necesario para gestionar la lista de
-              espera y cumplir las finalidades descritas, salvo que la legislación aplicable
-              exija o permita un período diferente.
+              Conservaremos tus datos durante el tiempo necesario para gestionar la lista de espera
+              y cumplir las finalidades descritas, salvo que la legislación aplicable exija o
+              permita un período diferente.
             </p>
           </div>
 
@@ -128,14 +134,15 @@ export function PrivacySection({
             <strong className='text-foreground block mb-0.5'>¿Cuáles son tus derechos?</strong>
             <p>
               Puedes solicitar información sobre el tratamiento de tus datos personales, pedir su
-              actualización o eliminación cuando corresponda, retirar tu consentimiento y
-              ejercer los demás derechos que te reconozca la legislación aplicable.
+              actualización o eliminación cuando corresponda, retirar tu consentimiento y ejercer
+              los demás derechos que te reconozca la legislación aplicable.
             </p>
             <p className='mt-1'>
               Para realizar una solicitud relacionada con tus datos personales, escribe a{' '}
               <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline'>
                 movbe58@gmail.com
-              </a>.
+              </a>
+              .
             </p>
           </div>
         </div>
@@ -165,15 +172,17 @@ export function PrivacySection({
                 className='text-xs sm:text-sm font-medium leading-relaxed cursor-pointer text-foreground'
               >
                 <span className='font-bold text-destructive mr-1'>*</span>
-                <strong className='underline-offset-2'>Aceptación del aviso de privacidad</strong>{' '}
+                <strong className='underline-offset-2'>
+                  Aceptación del aviso de privacidad
+                </strong>{' '}
                 <span className='text-xs font-normal text-muted-foreground'>
                   (Casilla de verificación obligatoria)
                 </span>
               </Label>
               <p className='text-xs text-muted-foreground leading-relaxed'>
-                He leído el aviso de privacidad y entiendo cómo Movbe utilizará mis datos
-                personales para gestionar mi inscripción en la lista de espera de Rompehielo y
-                atender mi solicitud.
+                He leído el aviso de privacidad y entiendo cómo Movbe utilizará mis datos personales
+                para gestionar mi inscripción en la lista de espera de Rompehielo y atender mi
+                solicitud.
               </p>
             </div>
           </div>
@@ -206,9 +215,9 @@ export function PrivacySection({
               </Label>
               <p className='text-xs text-muted-foreground leading-relaxed'>
                 Autorizo expresamente a Movbe a utilizar mi correo electrónico para enviarme
-                novedades, actualizaciones, invitaciones a probar nuevas funciones y
-                comunicaciones comerciales o promocionales relacionadas con Rompehielo.
-                Entiendo que puedo retirar mi consentimiento en cualquier momento escribiendo a{' '}
+                novedades, actualizaciones, invitaciones a probar nuevas funciones y comunicaciones
+                comerciales o promocionales relacionadas con Rompehielo. Entiendo que puedo retirar
+                mi consentimiento en cualquier momento escribiendo a{' '}
                 <a href='mailto:movbe58@gmail.com' className='text-primary hover:underline'>
                   movbe58@gmail.com
                 </a>{' '}
@@ -223,10 +232,7 @@ export function PrivacySection({
         <div className='text-xs text-muted-foreground pt-1 flex items-center justify-between flex-wrap gap-2'>
           <span>
             Contacto para consultas sobre privacidad:{' '}
-            <a
-              href='mailto:movbe58@gmail.com'
-              className='text-primary font-medium hover:underline'
-            >
+            <a href='mailto:movbe58@gmail.com' className='text-primary font-medium hover:underline'>
               movbe58@gmail.com
             </a>
           </span>

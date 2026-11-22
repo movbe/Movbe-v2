@@ -23,10 +23,7 @@ export async function POST(request: NextRequest) {
 
     const supabase = getSupabaseAdminClient() ?? (await getSupabaseServerClient())
     if (!supabase) {
-      return NextResponse.json(
-        { error: 'Supabase not configured' },
-        { status: 503 }
-      )
+      return NextResponse.json({ error: 'Supabase not configured' }, { status: 503 })
     }
 
     const { data, error } = await supabase

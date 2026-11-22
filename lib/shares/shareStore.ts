@@ -141,7 +141,7 @@ export async function getShareByShortId(shortId: string): Promise<ShareRecord | 
   }
 
   const store = await readLocalStore()
-  return store.shares.find((s) => s.shortId === shortId) ?? null
+  return store.shares.find(s => s.shortId === shortId) ?? null
 }
 
 export async function recordShareEvent(params: {
@@ -178,7 +178,7 @@ export async function listAudioTemplates(userId?: string): Promise<AudioTemplate
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
 
-    return (data || []).map((row) => ({
+    return (data || []).map(row => ({
       id: row.id,
       userId: row.user_id,
       title: row.title,
@@ -227,9 +227,7 @@ export interface ShareQuotaStatus {
   canCreateShare: boolean
 }
 
-export async function getUserShareQuotaStatus(
-  userId?: string | null
-): Promise<ShareQuotaStatus> {
+export async function getUserShareQuotaStatus(userId?: string | null): Promise<ShareQuotaStatus> {
   const supabase = getSupabaseAdminClient() ?? (await getSupabaseServerClient())
   if (!supabase || !userId) {
     // Local dev / unconfigured Supabase: allow full MVP testing
@@ -262,8 +260,7 @@ export async function getUserShareQuotaStatus(
     .gte('created_at', monthStart.toISOString())
 
   const usedThisMonth = count ?? 0
-  const canCreateShare =
-    quota.monthlyShares === null || usedThisMonth < quota.monthlyShares
+  const canCreateShare = quota.monthlyShares === null || usedThisMonth < quota.monthlyShares
 
   return {
     planTier,
@@ -317,7 +314,7 @@ export async function getShareAnalytics(sharerId?: string | null): Promise<Share
       }
     }
 
-    const shareIds = shares.map((s) => s.id)
+    const shareIds = shares.map(s => s.id)
     const { data: eventsRows } = await supabase
       .from('share_events')
       .select('share_id, event_type')
@@ -363,7 +360,7 @@ export async function getShareAnalytics(sharerId?: string | null): Promise<Share
       taps,
       reshares,
       ctaClicks,
-      recentShares: shares.map((s) => {
+      recentShares: shares.map(s => {
         const stats = byShare.get(s.id) ?? { views: 0, taps: 0, reshares: 0, ctaClicks: 0 }
         return {
           shortId: s.short_id,
@@ -410,7 +407,7 @@ export async function getShareAnalytics(sharerId?: string | null): Promise<Share
     taps,
     reshares,
     ctaClicks,
-    recentShares: shares.map((s) => {
+    recentShares: shares.map(s => {
       const stats = byShare.get(s.id) ?? { views: 0, taps: 0, reshares: 0, ctaClicks: 0 }
       return {
         shortId: s.shortId,

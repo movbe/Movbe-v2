@@ -52,7 +52,9 @@ export function TapToRevealClient({ share }: TapToRevealClientProps) {
       el.pause()
       setIsPlaying(false)
     } else {
-      el.play().then(() => setIsPlaying(true)).catch(() => {})
+      el.play()
+        .then(() => setIsPlaying(true))
+        .catch(() => {})
     }
   }
 
@@ -166,7 +168,7 @@ export function TapToRevealClient({ share }: TapToRevealClientProps) {
         <Card className='border-zinc-800 bg-zinc-900/60'>
           <button
             type='button'
-            onClick={() => setShowLayer2((v) => !v)}
+            onClick={() => setShowLayer2(v => !v)}
             className='w-full flex items-center justify-between px-5 py-3.5 text-left'
           >
             <span className='text-sm font-medium text-zinc-200'>Contexto del fragmento</span>
@@ -190,7 +192,7 @@ export function TapToRevealClient({ share }: TapToRevealClientProps) {
         <Card className='border-zinc-800 bg-zinc-900/60'>
           <button
             type='button'
-            onClick={() => setShowLayer3((v) => !v)}
+            onClick={() => setShowLayer3(v => !v)}
             className='w-full flex items-center justify-between px-5 py-3.5 text-left'
           >
             <span className='text-sm font-medium text-zinc-200'>Acciones rápidas</span>

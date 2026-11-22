@@ -14,8 +14,8 @@ export function ShareAnalyticsPanel({ refreshKey = 0 }: { refreshKey?: number })
 
   useEffect(() => {
     fetch('/api/v1/shares/analytics')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
+      .then(r => (r.ok ? r.json() : null))
+      .then(data => {
         if (data) {
           setAnalytics(data.analytics)
           setQuota(data.quota)
@@ -69,19 +69,15 @@ export function ShareAnalyticsPanel({ refreshKey = 0 }: { refreshKey?: number })
           </div>
           <div className='rounded-lg border p-3'>
             <p className='text-xs text-muted-foreground'>Re-shares / CTAs</p>
-            <p className='text-2xl font-bold mt-1'>
-              {analytics.reshares + analytics.ctaClicks}
-            </p>
+            <p className='text-2xl font-bold mt-1'>{analytics.reshares + analytics.ctaClicks}</p>
           </div>
         </div>
 
         {analytics.recentShares.length > 0 && (
           <div className='space-y-2'>
-            <p className='text-xs font-medium text-muted-foreground uppercase'>
-              Shares recientes
-            </p>
+            <p className='text-xs font-medium text-muted-foreground uppercase'>Shares recientes</p>
             <div className='divide-y rounded-lg border'>
-              {analytics.recentShares.slice(0, 5).map((item) => (
+              {analytics.recentShares.slice(0, 5).map(item => (
                 <div
                   key={item.shortId}
                   className='flex items-center justify-between gap-3 px-3 py-2 text-sm'

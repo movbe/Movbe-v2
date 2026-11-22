@@ -60,7 +60,8 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
     if (!companyName.trim() || !contactName.trim() || !email.trim()) {
       toast({
         title: 'Campos requeridos',
-        description: 'Por favor completa el nombre de la empresa, persona de contacto y correo electrónico.',
+        description:
+          'Por favor completa el nombre de la empresa, persona de contacto y correo electrónico.',
         variant: 'destructive',
       })
       return
@@ -102,7 +103,8 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
 
       toast({
         title: '¡Solicitud recibida!',
-        description: 'Los datos de tu marca y empresa han sido registrados en la lista de espera VIP.',
+        description:
+          'Los datos de tu marca y empresa han sido registrados en la lista de espera VIP.',
       })
       onSuccess({ name: contactName || companyName, email })
     } catch {
@@ -153,7 +155,10 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
         </Label>
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
           <div className='space-y-2'>
-            <Label htmlFor='cust-q1-company' className='text-xs text-muted-foreground flex items-center gap-1'>
+            <Label
+              htmlFor='cust-q1-company'
+              className='text-xs text-muted-foreground flex items-center gap-1'
+            >
               <Building2 className='h-3.5 w-3.5 text-primary' /> Nombre de la empresa/marca: *
             </Label>
             <Input
@@ -169,7 +174,10 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
           </div>
 
           <div className='space-y-2'>
-            <Label htmlFor='cust-q1-contact' className='text-xs text-muted-foreground flex items-center gap-1'>
+            <Label
+              htmlFor='cust-q1-contact'
+              className='text-xs text-muted-foreground flex items-center gap-1'
+            >
               <User className='h-3.5 w-3.5 text-primary' /> Nombre de la persona de contacto: *
             </Label>
             <Input
@@ -187,7 +195,10 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
 
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1'>
           <div className='space-y-2'>
-            <Label htmlFor='cust-q1-email' className='text-xs text-muted-foreground flex items-center gap-1'>
+            <Label
+              htmlFor='cust-q1-email'
+              className='text-xs text-muted-foreground flex items-center gap-1'
+            >
               <Mail className='h-3.5 w-3.5 text-primary' /> Correo electrónico corporativo: *
             </Label>
             <Input
@@ -203,7 +214,10 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
           </div>
 
           <div className='space-y-2'>
-            <Label htmlFor='cust-q1-web' className='text-xs text-muted-foreground flex items-center gap-1'>
+            <Label
+              htmlFor='cust-q1-web'
+              className='text-xs text-muted-foreground flex items-center gap-1'
+            >
               <Globe className='h-3.5 w-3.5 text-emerald-500' /> Sitio web o Instagram de la marca:
             </Label>
             <Input
@@ -232,16 +246,25 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
             'Eventos / Entretenimiento / Música',
             'Marcas para adultos (Bienestar, juguetes, lencería, etc.)',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`cat-${opt}`} />
-              <Label htmlFor={`cat-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`cat-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
           ))}
           <div className='flex items-center space-x-2.5 p-2.5 rounded-lg border border-transparent'>
             <RadioGroupItem value='otra' id='cat-otra' />
-            <Label htmlFor='cat-otra' className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'>
+            <Label
+              htmlFor='cat-otra'
+              className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'
+            >
               Otra:
             </Label>
             <Input
@@ -260,25 +283,39 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
       {/* Pregunta 3 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          3. Actualmente, ¿cuál es tu mayor frustración al pautar en redes sociales tradicionales (Meta, Google, TikTok)?
+          3. Actualmente, ¿cuál es tu mayor frustración al pautar en redes sociales tradicionales
+          (Meta, Google, TikTok)?
         </Label>
-        <RadioGroup value={adFrustration} onValueChange={setAdFrustration} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={adFrustration}
+          onValueChange={setAdFrustration}
+          className='space-y-2 pt-1'
+        >
           {[
             'Mis anuncios son censurados o rechazados injustificadamente.',
             'Mis CPMs son muy altos y el alcance es cada vez menor.',
             'Me es imposible llegar a un público adulto de alto poder adquisitivo sin que me limiten el contenido.',
             'Mi equipo pierde mucho tiempo lidiando con restricciones de las plataformas.',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`frust-${opt}`} />
-              <Label htmlFor={`frust-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`frust-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
           ))}
           <div className='flex items-center space-x-2.5 p-2.5 rounded-lg border border-transparent'>
             <RadioGroupItem value='otra' id='frust-otra' />
-            <Label htmlFor='frust-otra' className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'>
+            <Label
+              htmlFor='frust-otra'
+              className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'
+            >
               Otra:
             </Label>
             <Input
@@ -297,9 +334,14 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
       {/* Pregunta 4 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          4. Si te dijéramos que podemos llegar a una audiencia adulta (+18), verificada y con capacidad de compra, ¿cuál sería tu objetivo principal en esta plataforma?
+          4. Si te dijéramos que podemos llegar a una audiencia adulta (+18), verificada y con
+          capacidad de compra, ¿cuál sería tu objetivo principal en esta plataforma?
         </Label>
-        <RadioGroup value={mainObjective} onValueChange={setMainObjective} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={mainObjective}
+          onValueChange={setMainObjective}
+          className='space-y-2 pt-1'
+        >
           {[
             'Ventas Directas: Quiero que compren mi producto o servicio inmediatamente.',
             'Difusión / Branding: Quiero dar a conocer mi marca y posicionarla en este nicho.',
@@ -307,9 +349,15 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
             'Leads: Quiero capturar datos de contacto calificados.',
             'Mixto: Un poco de branding y ventas directas.',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`obj-${opt}`} />
-              <Label htmlFor={`obj-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`obj-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -320,17 +368,30 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
       {/* Pregunta 5 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          5. En Movbe sabemos que un producto &ldquo;común&rdquo; (ej. una hamburguesa, un curso de finanzas o un celular) puede romperla en este ecosistema si se adapta al tono adulto. ¿Estás dispuesto a dejar que nuestro equipo asesore y modifique los ángulos creativos de tu marca para este nicho?
+          5. En Movbe sabemos que un producto &ldquo;común&rdquo; (ej. una hamburguesa, un curso de
+          finanzas o un celular) puede romperla en este ecosistema si se adapta al tono adulto.
+          ¿Estás dispuesto a dejar que nuestro equipo asesore y modifique los ángulos creativos de
+          tu marca para este nicho?
         </Label>
-        <RadioGroup value={creativeAdaptation} onValueChange={setCreativeAdaptation} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={creativeAdaptation}
+          onValueChange={setCreativeAdaptation}
+          className='space-y-2 pt-1'
+        >
           {[
             'Sí, confío en el equipo de Movbe para adaptar mi mensaje.',
             'Sí, pero necesito aprobar los cambios finales.',
             'No, quiero mantener mi publicidad exactamente igual a como la tengo en otras redes.',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`adapt-${opt}`} />
-              <Label htmlFor={`adapt-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`adapt-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -341,18 +402,30 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
       {/* Pregunta 6 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          6. Entendiendo nuestra oferta de &ldquo;Cero Riesgo&rdquo; (Nosotros ejecutamos la pauta primero, tú pagas al ver los resultados), si la campaña cumple tus expectativas, ¿cuál es el presupuesto mensual que estarías dispuesto a invertir?
+          6. Entendiendo nuestra oferta de &ldquo;Cero Riesgo&rdquo; (Nosotros ejecutamos la pauta
+          primero, tú pagas al ver los resultados), si la campaña cumple tus expectativas, ¿cuál es
+          el presupuesto mensual que estarías dispuesto a invertir?
         </Label>
-        <RadioGroup value={budgetMonthly} onValueChange={setBudgetMonthly} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={budgetMonthly}
+          onValueChange={setBudgetMonthly}
+          className='space-y-2 pt-1'
+        >
           {[
             'Menos de $1.000.000 COP (aprox. $250 USD)',
             'De $1.000.000 a $3.000.000 COP (aprox. $250 - $750 USD)',
             'De $3.000.001 a $6.000.000 COP (aprox. $750 - $1.500 USD)',
             'Más de $6.000.000 COP (Más de $1.500 USD - Escala Premium)',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`budget-${opt}`} />
-              <Label htmlFor={`budget-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`budget-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -363,7 +436,8 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
       {/* Pregunta 7 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label htmlFor='cust-success-metric' className='text-sm sm:text-base font-semibold block'>
-          7. ¿Qué métrica o resultado exacto necesitas ver para sentir que esta alianza con Movbe fue un éxito rotundo? (Ej: X número de ventas, X de ROI, X de asistentes al evento, etc.)
+          7. ¿Qué métrica o resultado exacto necesitas ver para sentir que esta alianza con Movbe
+          fue un éxito rotundo? (Ej: X número de ventas, X de ROI, X de asistentes al evento, etc.)
         </Label>
         <Textarea
           id='cust-success-metric'
@@ -379,17 +453,29 @@ export function CustomerForm({ onSuccess }: CustomerFormProps) {
       {/* Pregunta 8 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          8. Como Early Adopter, tendrás acceso prioritario y acompañamiento personalizado. ¿Aceptas entrar a nuestra lista de espera VIP y que nos pongamos en contacto contigo para diseñar la estrategia de tu primera campaña gratuita/por resultados?
+          8. Como Early Adopter, tendrás acceso prioritario y acompañamiento personalizado. ¿Aceptas
+          entrar a nuestra lista de espera VIP y que nos pongamos en contacto contigo para diseñar
+          la estrategia de tu primera campaña gratuita/por resultados?
         </Label>
-        <RadioGroup value={vipWaitlistConsent} onValueChange={setVipWaitlistConsent} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={vipWaitlistConsent}
+          onValueChange={setVipWaitlistConsent}
+          className='space-y-2 pt-1'
+        >
           {[
             'Sí, quiero ser de los primeros y agendar mi asesoría.',
             'Tal vez, envíenme más información primero.',
             'No por ahora.',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`vip-${opt}`} />
-              <Label htmlFor={`vip-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`vip-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>

@@ -6,11 +6,7 @@ import { TapToRevealClient } from './TapToRevealClient'
 
 export const dynamic = 'force-dynamic'
 
-export default async function TapToRevealPage({
-  params,
-}: {
-  params: { shortId: string }
-}) {
+export default async function TapToRevealPage({ params }: { params: { shortId: string } }) {
   const share = await getShareByShortId(params.shortId)
   if (!share) {
     notFound()

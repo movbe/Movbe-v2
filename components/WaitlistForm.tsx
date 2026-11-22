@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  CheckCircle2,
-  Film,
-  Info,
-  Share2,
-  Sparkles,
-  Users,
-} from 'lucide-react'
+import { CheckCircle2, Film, Info, Share2, Sparkles, Users } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -80,7 +73,10 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
           </div>
 
           <div className='space-y-2'>
-            <Badge variant='outline' className='bg-primary/5 text-primary border-primary/20 px-3 py-1'>
+            <Badge
+              variant='outline'
+              className='bg-primary/5 text-primary border-primary/20 px-3 py-1'
+            >
               <Sparkles className='h-3.5 w-3.5 mr-1.5' /> {typeLabels[submittedData.type].label}
             </Badge>
             <h2 className='text-2xl sm:text-3xl font-bold tracking-tight'>
@@ -90,7 +86,9 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
               {typeLabels[submittedData.type].desc}
             </p>
             <p className='text-xs text-muted-foreground'>
-              Te notificaremos a <span className='font-semibold text-foreground'>{submittedData.email}</span> cuando la versión Beta esté lista.
+              Te notificaremos a{' '}
+              <span className='font-semibold text-foreground'>{submittedData.email}</span> cuando la
+              versión Beta esté lista.
             </p>
           </div>
 
@@ -104,7 +102,8 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
               {typeLabels[submittedData.type].label}
             </p>
             <p>
-              &bull; <strong className='text-foreground'>Aviso de privacidad:</strong> Aceptado y vigente
+              &bull; <strong className='text-foreground'>Aviso de privacidad:</strong> Aceptado y
+              vigente
             </p>
             <p>
               &bull; <strong className='text-foreground'>Contacto de privacidad:</strong>{' '}
@@ -135,14 +134,16 @@ export function WaitlistForm({ defaultTab = 'icebreaker' }: WaitlistFormProps) {
             variant='outline'
             className='bg-primary/10 text-primary border-primary/30 px-3 py-1 font-medium'
           >
-            <Sparkles className='h-3.5 w-3.5 mr-1.5' /> Acceso Anticipado &bull; Beta Movbe &bull; Rompehielo
+            <Sparkles className='h-3.5 w-3.5 mr-1.5' /> Acceso Anticipado &bull; Beta Movbe &bull;
+            Rompehielo
           </Badge>
         </div>
         <CardTitle className='text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text'>
           Cuestionarios Early Adopters & Lista de Espera
         </CardTitle>
         <CardDescription className='text-sm sm:text-base leading-relaxed'>
-          Selecciona tu perfil para responder el cuestionario correspondiente y entrar a la lista de espera prioritaria.
+          Selecciona tu perfil para responder el cuestionario correspondiente y entrar a la lista de
+          espera prioritaria.
         </CardDescription>
 
         {/* Tabs de Selección entre los 3 formularios */}

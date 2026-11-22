@@ -93,7 +93,8 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
           mainNetwork: mainNetwork === 'otro' ? `Otro: ${mainNetworkOther}` : mainNetwork,
           videosPerMonth,
           adSpendMonthly,
-          sharingFrustration: sharingFrustration === 'otro' ? `Otro: ${sharingFrustrationOther}` : sharingFrustration,
+          sharingFrustration:
+            sharingFrustration === 'otro' ? `Otro: ${sharingFrustrationOther}` : sharingFrustration,
           icebreakerBoostBelief,
           icebreakerWhy,
           betaContactConsent,
@@ -141,7 +142,10 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
         </Label>
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
           <div className='space-y-2'>
-            <Label htmlFor='ice-q1-name' className='text-xs text-muted-foreground flex items-center gap-1'>
+            <Label
+              htmlFor='ice-q1-name'
+              className='text-xs text-muted-foreground flex items-center gap-1'
+            >
               <User className='h-3.5 w-3.5 text-primary' /> Nombre: *
             </Label>
             <Input
@@ -157,7 +161,10 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
           </div>
 
           <div className='space-y-2'>
-            <Label htmlFor='ice-q1-email' className='text-xs text-muted-foreground flex items-center gap-1'>
+            <Label
+              htmlFor='ice-q1-email'
+              className='text-xs text-muted-foreground flex items-center gap-1'
+            >
               <Mail className='h-3.5 w-3.5 text-primary' /> Email: *
             </Label>
             <Input
@@ -179,16 +186,26 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
         <Label className='text-sm sm:text-base font-semibold block'>
           2. ¿Cómo te defines principalmente?
         </Label>
-        <RadioGroup value={roleDefinition} onValueChange={setRoleDefinition} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={roleDefinition}
+          onValueChange={setRoleDefinition}
+          className='space-y-2 pt-1'
+        >
           {[
             'Creador de contenido / Influencer',
             'Emprendedor / Dueño de negocio',
             'Empresa / Marca (con equipo)',
             'Agencia de marketing',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`role-${opt}`} />
-              <Label htmlFor={`role-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`role-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -208,9 +225,15 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
             'Ambos',
             'No vendo, solo creo contenido (Creador)',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`prod-${opt}`} />
-              <Label htmlFor={`prod-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`prod-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -224,22 +247,26 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
           4. ¿Cuál es tu red principal para compartir tus videos hoy?
         </Label>
         <RadioGroup value={mainNetwork} onValueChange={setMainNetwork} className='space-y-2 pt-1'>
-          {[
-            'WhatsApp / Estados',
-            'Instagram (Reels / DM)',
-            'TikTok',
-            'YouTube',
-          ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+          {['WhatsApp / Estados', 'Instagram (Reels / DM)', 'TikTok', 'YouTube'].map(opt => (
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`net-${opt}`} />
-              <Label htmlFor={`net-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`net-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
           ))}
           <div className='flex items-center space-x-2.5 p-2.5 rounded-lg border border-transparent'>
             <RadioGroupItem value='otro' id='net-otro' />
-            <Label htmlFor='net-otro' className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'>
+            <Label
+              htmlFor='net-otro'
+              className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'
+            >
               Otro:
             </Label>
             <Input
@@ -260,20 +287,27 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
         <Label className='text-sm sm:text-base font-semibold block'>
           5. ¿Cuántos videos compartes al mes para publicitar tu producto, servicio o contenido?
         </Label>
-        <RadioGroup value={videosPerMonth} onValueChange={setVideosPerMonth} className='space-y-2 pt-1'>
-          {[
-            'De 1 a 5 videos',
-            'De 6 a 15 videos',
-            'De 16 a 30 videos',
-            'Más de 30 videos',
-          ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
-              <RadioGroupItem value={opt} id={`vids-${opt}`} />
-              <Label htmlFor={`vids-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
-                {opt}
-              </Label>
-            </div>
-          ))}
+        <RadioGroup
+          value={videosPerMonth}
+          onValueChange={setVideosPerMonth}
+          className='space-y-2 pt-1'
+        >
+          {['De 1 a 5 videos', 'De 6 a 15 videos', 'De 16 a 30 videos', 'Más de 30 videos'].map(
+            opt => (
+              <div
+                key={opt}
+                className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+              >
+                <RadioGroupItem value={opt} id={`vids-${opt}`} />
+                <Label
+                  htmlFor={`vids-${opt}`}
+                  className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+                >
+                  {opt}
+                </Label>
+              </div>
+            )
+          )}
         </RadioGroup>
       </div>
 
@@ -282,15 +316,25 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
         <Label className='text-sm sm:text-base font-semibold block'>
           6. ¿Cuánto gastas aproximadamente en publicidad en redes sociales al mes?
         </Label>
-        <RadioGroup value={adSpendMonthly} onValueChange={setAdSpendMonthly} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={adSpendMonthly}
+          onValueChange={setAdSpendMonthly}
+          className='space-y-2 pt-1'
+        >
           {[
             '$0 - $2.000.000 COP (aprox. $0 - $500 USD)',
             '$2.000.000 - $4.000.000 COP (aprox. $500 - $1.000 USD)',
             'Más de $4.000.000 COP (más de $1.000 USD)',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`spend-${opt}`} />
-              <Label htmlFor={`spend-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`spend-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -303,23 +347,36 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
         <Label className='text-sm sm:text-base font-semibold block'>
           7. ¿Cuál es tu mayor frustración cuando compartes un video por WhatsApp o redes?
         </Label>
-        <RadioGroup value={sharingFrustration} onValueChange={setSharingFrustration} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={sharingFrustration}
+          onValueChange={setSharingFrustration}
+          className='space-y-2 pt-1'
+        >
           {[
             'Que la gente no lo abre porque solo aparece un link feo',
             'Que pierdo mi marca/nombre cuando reenvían el video',
             'Que tengo que descargar el video en el celular para poder compartirlo',
             'Que la gente desconfía del link (miedo a estafas)',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`frust-share-${opt}`} />
-              <Label htmlFor={`frust-share-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`frust-share-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
           ))}
           <div className='flex items-center space-x-2.5 p-2.5 rounded-lg border border-transparent'>
             <RadioGroupItem value='otro' id='frust-share-otro' />
-            <Label htmlFor='frust-share-otro' className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'>
+            <Label
+              htmlFor='frust-share-otro'
+              className='text-xs sm:text-sm cursor-pointer font-normal shrink-0'
+            >
               Otro:
             </Label>
             <Input
@@ -338,13 +395,24 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
       {/* Pregunta 8 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          8. ¿Crees que &ldquo;Rompehielo&rdquo; (videos con tu voz/cara integrada y sin links feos) potenciaría la venta de tu producto o servicio?
+          8. ¿Crees que &ldquo;Rompehielo&rdquo; (videos con tu voz/cara integrada y sin links feos)
+          potenciaría la venta de tu producto o servicio?
         </Label>
-        <RadioGroup value={icebreakerBoostBelief} onValueChange={setIcebreakerBoostBelief} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={icebreakerBoostBelief}
+          onValueChange={setIcebreakerBoostBelief}
+          className='space-y-2 pt-1'
+        >
           {['Sí', 'No', 'Tal vez'].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`boost-${opt}`} />
-              <Label htmlFor={`boost-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`boost-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>
@@ -369,16 +437,27 @@ export function IcebreakerForm({ onSuccess }: IcebreakerFormProps) {
       {/* Pregunta 9 */}
       <div className='space-y-3 p-4 rounded-xl bg-card border'>
         <Label className='text-sm sm:text-base font-semibold block'>
-          9. Para cerrar: ¿Quieres ser de los primeros en adoptar la versión Beta y aceptas que nos pongamos en contacto contigo a partir de febrero del 2026?
+          9. Para cerrar: ¿Quieres ser de los primeros en adoptar la versión Beta y aceptas que nos
+          pongamos en contacto contigo a partir de febrero del 2026?
         </Label>
-        <RadioGroup value={betaContactConsent} onValueChange={setBetaContactConsent} className='space-y-2 pt-1'>
+        <RadioGroup
+          value={betaContactConsent}
+          onValueChange={setBetaContactConsent}
+          className='space-y-2 pt-1'
+        >
           {[
             'Sí, quiero entrar a la lista de espera y acepto ser contactado.',
             'No por ahora, solo quiero recibir información.',
           ].map(opt => (
-            <div key={opt} className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'>
+            <div
+              key={opt}
+              className='flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-muted/50 border border-transparent hover:border-border transition-colors'
+            >
               <RadioGroupItem value={opt} id={`beta-${opt}`} />
-              <Label htmlFor={`beta-${opt}`} className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'>
+              <Label
+                htmlFor={`beta-${opt}`}
+                className='text-xs sm:text-sm cursor-pointer flex-1 font-normal'
+              >
                 {opt}
               </Label>
             </div>

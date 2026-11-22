@@ -3,10 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getShareByShortId, recordShareEvent } from '@/lib/shares/shareStore'
 import { isAllowedEventType, isValidShortId } from '@/lib/shares/validation'
 
-export async function POST(
-  request: NextRequest,
-  context: { params: { shortId: string } }
-) {
+export async function POST(request: NextRequest, context: { params: { shortId: string } }) {
   const { shortId } = context.params
   if (!isValidShortId(shortId)) {
     return NextResponse.json({ error: 'Invalid shortId' }, { status: 400 })

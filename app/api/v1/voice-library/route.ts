@@ -27,7 +27,9 @@ export async function POST(request: NextRequest) {
     }
 
     const formData = await request.formData()
-    const title = String(formData.get('title') || '').trim().slice(0, 120)
+    const title = String(formData.get('title') || '')
+      .trim()
+      .slice(0, 120)
     const durationSec = Number(formData.get('durationSec') || 5)
     const transcript = formData.get('transcript')
       ? String(formData.get('transcript')).slice(0, 1000)

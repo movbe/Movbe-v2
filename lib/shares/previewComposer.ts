@@ -32,25 +32,14 @@ async function runFfmpeg(args: string[]): Promise<void> {
  * Creates a clean 600x600 fallback base image via FFmpeg if no remote thumbnail is available.
  */
 async function createFallbackPoster(outPath: string): Promise<void> {
-  await runFfmpeg([
-    '-f',
-    'lavfi',
-    '-i',
-    'color=c=#0f172a:s=600x600:d=1',
-    '-frames:v',
-    '1',
-    outPath,
-  ])
+  await runFfmpeg(['-f', 'lavfi', '-i', 'color=c=#0f172a:s=600x600:d=1', '-frames:v', '1', outPath])
 }
 
 /**
  * Downloads remote thumbnail or generates a solid 600x600 poster.
  * Normalizes to 600x600 JPEG so downstream filters have predictable dimensions.
  */
-async function prepareBasePoster(
-  thumbnailUrl: string | null,
-  workDir: string
-): Promise<string> {
+async function prepareBasePoster(thumbnailUrl: string | null, workDir: string): Promise<string> {
   const normalizedPath = path.join(workDir, 'base_600.jpg')
 
   if (thumbnailUrl) {

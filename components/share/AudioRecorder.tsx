@@ -33,7 +33,7 @@ export function AudioRecorder({
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
-      streamRef.current?.getTracks().forEach((t) => t.stop())
+      streamRef.current?.getTracks().forEach(t => t.stop())
       if (audioUrl) URL.revokeObjectURL(audioUrl)
     }
   }, [audioUrl])
@@ -46,7 +46,7 @@ export function AudioRecorder({
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
       mediaRecorderRef.current.stop()
     }
-    streamRef.current?.getTracks().forEach((t) => t.stop())
+    streamRef.current?.getTracks().forEach(t => t.stop())
     setRecording(false)
   }
 
@@ -66,7 +66,7 @@ export function AudioRecorder({
       })
 
       const chunks: BlobPart[] = []
-      recorder.ondataavailable = (e) => {
+      recorder.ondataavailable = e => {
         if (e.data.size > 0) chunks.push(e.data)
       }
       recorder.onstop = () => {
@@ -159,7 +159,7 @@ export function AudioRecorder({
             <div className='flex items-center gap-2 pt-1'>
               <Input
                 value={templateTitle}
-                onChange={(e) => setTemplateTitle(e.target.value)}
+                onChange={e => setTemplateTitle(e.target.value)}
                 placeholder='Guardar en Voice Library (ej: Intro propiedad)...'
                 className='h-8 text-xs'
               />
